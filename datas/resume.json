@@ -1,0 +1,131 @@
+{
+    "basics": {
+        "name": "Carl Jeferson I. Uri",
+        "label": "Bachelor of Science in Information Technology",
+        "email": "uricarljeferson@gmail.com",
+        "phone": "(555) 555-5555",
+        "summary": "A Bachelor of Science in Information Technology graduate with major in Network Technology. Experienced hands-on in Web Development, IoT Systems, and Creative Design. Built multiple projects using HTML, CSS, JavaScript, PHP, Firebase, and Arduino. Familiar with system administration and basic AWS cloud services. Eager to join a dynamic team to grow and I can apply these skills in a collaborative environment."
+    },
+    "education": [
+        {
+            "institution": "Batangas State University The National Engineering University - JPLC Malvar Campus",
+            "area": "Information Technology",
+            "studyType": "Bachelor of Science",
+            "startDate": "2021",
+            "endDate": "2025"
+        }
+    ],
+    "skills": [
+    {
+        "name": "Programming Languages",
+        "keywords": ["HTML", "CSS", "JavaScript", "PHP", "Dart", "C++", "SQL"]
+    },
+    {
+        "name": "Frameworks & Tools",
+        "keywords": ["Flutter", "Bootstrap", "Arduino IDE"]
+    },
+    {
+        "name": "Database",
+        "keywords": ["MySQL", "Firebase Database"]
+    },
+    {
+        "name": "Cloud and Servers",
+        "keywords": ["AWS EC2", "AWS S3", "Windows Server"]
+    },
+    {
+        "name": "Networking",
+        "keywords": ["Network Configuration", "Troubleshooting", "Topology Design"]
+    },
+    {
+        "name": "Design",
+        "keywords": ["UI/UX Design", "Graphic Design"]
+    }
+],
+    
+    "experience": [
+    {
+      "company": "Arktech Philippines",
+      "position": "On-the-Job Trainee",
+      "duration": "2025",
+      "hours": 500,
+      "responsibilities": [
+        "Developed an IoT machine monitoring system using HTML, CSS, JavaScript, PHP, and MySQL",
+        "Integrated Arduino sensors with the web application to track machine status and generate alerts",
+        "Implemented a notification system and alarm video playback feature",
+        "Optimized the display and processing of large datasets"
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Arduino", "IoT"]
+    },
+    {
+      "company": "Creotec Philippines",
+      "position": "Work Immersion Trainee",
+      "duration": "2020",
+      "hours": 80,
+      "responsibilities": [
+        "Identified and documented software bugs",
+        "Conducted UI/UX testing to ensure optimal performance",
+        "Provided actionable insights to improve usability and design responsiveness"
+      ],
+      "technologies": ["UI/UX Testing", "Quality Assurance", "Responsive Design"]
+    }
+  ], 
+
+     "projects": [
+    {
+      "name": "Home Lab (Virtual Machine)",
+      "role": "System Administrator",
+      "technologies": ["VirtualBox", "Windows Server", "Windows 10", "DNS", "DHCP", "Active Directory"],
+      "description": [
+        "Deployed Windows Server as a domain controller for centralized management",
+        "Configured Windows 10 clients with domain join settings",
+        "Implemented core network services including DNS and DHCP",
+        "Managed user accounts, permissions, and group policies via Active Directory"
+      ],
+      "category": "Networking/System Administration"
+    },
+    {
+      "name": "Machine Monitoring System",
+      "role": "Full Stack Developer",
+      "technologies": ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Arduino"],
+      "description": [
+        "Developed web-based platform for real-time machine status monitoring",
+        "Integrated Arduino sensors to trigger alerts and dynamic data visualization",
+        "Implemented video playback capturing footage prior to machine alarms",
+        "Optimized frontend performance for handling large datasets"
+      ],
+      "category": "IoT/Web Development"
+    },
+    {
+      "name": "MeasuringBot (Capstone Project)",
+      "role": "Project Leader",
+      "technologies": ["HTML", "CSS", "Bootstrap", "JavaScript", "Firebase", "Arduino"],
+      "description": [
+        "Modernized traditional measuring wheel with cloud technology using Arduino",
+        "Developed wireless smartphone control for remote operation",
+        "Implemented auto-sketching features for measured areas visualization",
+        "Led all phases including planning, development, and testing"
+      ],
+      "category": "IoT/Cloud Computing"
+    },
+    {
+      "name": "PocketSight (Mobile App)",
+      "role": "Frontend & UI/UX Designer",
+      "technologies": ["Flutter", "Dart", "Firebase"],
+      "description": [
+        "Developed social media platform focused on digital art sharing",
+        "Designed intuitive UI/UX for art discovery and community features"
+      ],
+      "category": "Mobile Development"
+    },
+    {
+      "name": "Diwata Hotel Reservation System",
+      "role": "Frontend Developer",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "description": [
+        "Built responsive hotel booking website with modern design",
+        "Integrated chatbot support for customer assistance"
+      ],
+      "category": "Web Development"
+    }
+  ]
+}

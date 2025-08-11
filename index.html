@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carl</title>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <script src="https://cdn.tailwindcss.com"></script>    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#364156',
+              secondary: '#011638',
+              neutral: '#CDCDCD',
+              light: '#DFF8EB',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tcpdf/6.6.2/tcpdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+          .gradient-text {
+            background: linear-gradient(135deg, #364156 0%, #011638 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #DFF8EB 0%, #CDCDCD 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .nav-visible {
+            transform: translateY(0);
+        }          .nav-link.active {
+            color: #364156;
+        }
+        
+        .dark .nav-link.active {
+            color: #DFF8EB;
+        }
+        
+        .nav-link.active div {
+            transform: scaleX(1);
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .scroll-animate.scroll-in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 dark:text-gray-200 tracking-tight dark:bg-gray-900">
+    <!-- Navigation -->    
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 bg-white/80 dark:bg-gray-800/60 backdrop-blur-md shadow-lg">
+    <div class="container mx-auto">
+        <div class="flex items-center justify-between h-16">
+            <!-- Mobile menu button (left side) -->
+            <button class="md:hidden text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            
+            <!-- Desktop navigation links (right side) -->
+            <div class="hidden md:flex items-center gap-8 ml-auto">
+                <a href="#about" class="nav-link text-lg text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light transition-colors duration-300 relative group" data-section="about">
+                    About
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary dark:bg-light scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+                <a href="#timeline" class="nav-link text-lg text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light transition-colors duration-300 relative group" data-section="timeline">
+                    Experience
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary dark:bg-light scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+                <a href="#projects" class="nav-link text-lg text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light transition-colors duration-300 relative group" data-section="projects">
+                    Projects
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary dark:bg-light scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+                <button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-moon text-lg text-gray-600 dark:text-gray-300 dark:hidden"></i>
+                    <i class="fas fa-sun text-lg text-gray-600 dark:text-gray-300 hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden py-4">
+            <div class="flex flex-col gap-4">
+                <a href="#about" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 relative group" data-section="about">
+                    About
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+                <a href="#timeline" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 relative group" data-section="timeline">
+                    Experience
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+                <a href="#projects" class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 relative group" data-section="projects">
+                    Projects
+                    <div class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+   <!-- Hero Section -->
+<section class="relative min-h-screen flex items-center bg-gradient-to-br from-light via-white to-neutral dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+            
+    <div class="container mx-auto px-4 max-w-screen-2xl relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Side - Content -->
+            <div class="max-w-2xl animate-[fadeIn_1s_ease-out]">
+                <p class="text-base uppercase tracking-wider text-secondary dark:text-light mb-4 animate-[slideUp_0.8s_ease-out]">Welcome to my portfolio</p>
+                <h1 class="text-6xl md:text-8xl font-black mb-6 text-secondary dark:text-white tracking-tight leading-tight">Hi, I'm <span class="text-secondary dark:text-light">Carl</span></h1>
+                <p class="text-3xl md:text-4xl text-secondary dark:text-light mb-8 leading-relaxed">Graduate of BS Information Technology</p>
+                
+                <div class="flex items-center gap-2">
+                    <button onclick="openResumeModal()" class="inline-block px-8 py-4 bg-secondary dark:bg-light text-white dark:text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-primary dark:hover:bg-neutral hover:transform hover:-translate-y-1 hover:shadow-lg">
+                        View Resume
+                    </button>
+                    
+                    <!-- Social Icons -->
+                    <div class="flex items-center gap-2">
+                        <a href="mailto:uricarljeferson@gmail.com" class="w-14 h-14 bg-white dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:bg-red-500 hover:text-white hover:transform hover:-translate-y-1 hover:shadow-lg">
+                            <i class="fas fa-envelope text-2xl"></i>
+                        </a>
+                        <a href="https:linkedin.com/in/carl-jeferson-uri-710a76346" target="_blank" rel="noopener noreferrer" class="w-14 h-14 bg-white dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:bg-blue-600 hover:text-white hover:transform hover:-translate-y-1 hover:shadow-lg">
+                            <i class="fab fa-linkedin-in text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Image -->
+            <div class="hidden lg:flex justify-end items-center animate-[fadeIn_1.2s_ease-out_0.3s_both]">
+                <div class="relative h-[800px]">
+                    <img src="assets/GraduateCartoon.png" 
+                         alt="Carl - Graduate Cartoon" 
+                         class="w-full max-w-xl h-auto object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="fixed inset-0 bg-gray-900 bg-opacity-60 hidden items-center justify-center z-50">
+        <div id="resumeModalContent" class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto transition-all duration-300">
+            <div class="p-8 md:p-10">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-gray-800 dark:text-white tracking-tight">Resume</h2>
+                    <div class="flex items-center gap-4">
+                        <button onclick="downloadResumePDF()" class="text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-light transition-colors duration-200">
+                            <i class="fas fa-download text-xl"></i>
+                        </button>
+                        <button onclick="closeResumeModal()" class="text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-light transition-colors duration-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="resumeContent" class="space-y-10">
+                    <!-- Resume content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+        <a href="#about" class="p-4 bg-white/80 dark:bg-gray-800/80 rounded-full text-gray-800 dark:text-gray-200 shadow-md transition-all duration-300 hover:bg-white dark:hover:bg-gray-700 hover:shadow-lg">
+            <i class="fas fa-chevron-down text-xl"></i>
+        </a>
+    </div>
+</section>
+    <!-- About Section -->    
+     <section id="about" class="py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-neutral/10 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 scroll-animate">
+        <div class="container mx-auto px-4 max-w-screen-2xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex justify-center items-center">
+                    <img src="assets/LaptopShockCartoon.png" alt="Cartoon with Laptop" class="w-full max-w-md md:max-w-lg h-auto object-contain drop-shadow-2xl rounded-2xl">
+                </div>
+                <div class="group p-8 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative mb-8">
+                        <h2 class="text-4xl font-bold text-gray-800 gradient-text">About Me</h2>
+                        <div class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral transform origin-left group-hover:scale-x-150 transition-transform duration-500"></div>
+                    </div>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        I’m an IT graduate who blends web development, graphic design, and technical problem-solving to create solutions that are 
+                        both functional and visually engaging. From building responsive websites and designing graphics to integrating IoT systems 
+                        and managing cloud infrastructure, I love turning ideas into real, working projects. This portfolio is where I showcase some 
+                        of my favorite work.
+                    </p>
+                    <div class="mt-6 flex gap-4">
+                        <a href="#projects" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors duration-300">
+                            <span class="dark:text-white">View My Work</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300 dark:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8">
+                <div class="group p-8 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative mb-8 flex items-center gap-4">
+                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary dark:from-light dark:to-neutral shadow-md">
+                            <i class="fas fa-tools text-2xl text-white dark:text-primary"></i>
+                        </span>
+                        <h2 class="text-4xl font-bold text-gray-800 gradient-text">My Skills</h2>
+                    </div>
+                    <div class="mb-4 text-primary dark:text-light text-lg font-medium">A quick overview of my technical and creative skillset.</div>
+                    <div class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral transform origin-left group-hover:scale-x-125 transition-transform duration-500"></div>
+                    <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>    
+    
+    <!-- Timeline Section -->    <section id="timeline" class="py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 relative overflow-hidden scroll-animate">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+        <div class="container mx-auto px-4 max-w-screen-2xl relative">
+            <div class="relative mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 gradient-text">Experience</h2>
+                <div class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral"></div>
+            </div>
+            <div class="relative">                <!-- Timeline Line -->
+                <div class="absolute left-[15px] md:left-1/2 h-full w-[2px] bg-gradient-to-b from-primary to-secondary dark:from-light dark:to-neutral transform -translate-x-1/2"></div>
+                  <!-- Timeline Items -->
+                <div id="timeline-items" class="space-y-12">
+                    <!-- Timeline items will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->    <section id="projects" class="py-20 md:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 scroll-animate">
+        <div class="container mx-auto px-4 max-w-screen-2xl">
+            <div class="relative mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 gradient-text">Projects</h2>
+                <div class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral"></div>
+            </div>
+
+            
+            <!-- Graphic Poster Projects -->
+            <div class="mb-16 relative">
+                <h3 class="text-2xl font-bold mb-8 text-gray-700 gradient-text">Graphic Design</h3>
+                <div class="relative w-full overflow-hidden" id="poster-slider-wrapper">
+                    <div id="poster-slider" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0);">
+                        <!-- Images will be loaded here by JS -->
+                    </div>
+                    <button id="posterPrev" class="absolute left-0 top-1/2 -translate-y-1/2 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center hover:bg-secondary transition-all duration-300">
+                        <i class="fas fa-chevron-left text-3xl"></i>
+                    </button>
+                    <button id="posterNext" class="absolute right-0 top-1/2 -translate-y-1/2 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center hover:bg-secondary transition-all duration-300">
+                        <i class="fas fa-chevron-right text-3xl"></i>
+                    </button>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button id="viewAllBtn" class="px-6 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-secondary transition-all duration-300">View All</button>
+                </div>
+            </div>
+
+            <!-- Interface Design Projects -->
+            <div class="mb-16 relative">
+                <h3 class="text-2xl font-bold mb-8 text-gray-700 gradient-text">Interface Design</h3>
+                <div class="relative w-full overflow-hidden" id="interface-slider-wrapper">
+                    <div id="interface-slider" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0);">
+                        <!-- Images will be loaded here by JS -->
+                    </div>
+                    <button id="interfacePrev" class="absolute left-0 top-1/2 -translate-y-1/2 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center hover:bg-secondary transition-all duration-300">
+                        <i class="fas fa-chevron-left text-3xl"></i>
+                    </button>
+                    <button id="interfaceNext" class="absolute right-0 top-1/2 -translate-y-1/2 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center hover:bg-secondary transition-all duration-300">
+                        <i class="fas fa-chevron-right text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>    
+    <footer class="bg-gray-900 text-gray-200 border-t border-gray-800">
+    <div class="container mx-auto px-4 max-w-7xl py-12">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-6 gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-bold mb-2 text-white">Get in Touch</h3>
+                <p class="text-gray-400 mb-4 text-base">Feel free to reach out for collaborations or project inquiries.</p>
+            </div>
+            <div class="flex gap-6 items-center justify-center">
+                <a href="mailto:your.email@example.com" class="flex items-center gap-2 text-gray-200 hover:text-primary transition-colors duration-200 text-base font-medium">
+                    <i class="fas fa-envelope text-xl text-white"></i>
+                    <span>your.email@example.com</span>
+                </a>
+                <a href="https://github.com" target="_blank" class="flex items-center gap-2 text-gray-200 hover:text-primary transition-colors duration-200 text-base font-medium">
+                    <i class="fab fa-github text-xl text-white"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="flex items-center gap-2 text-gray-200 hover:text-primary transition-colors duration-200 text-base font-medium">
+                    <i class="fab fa-linkedin text-xl text-white"></i>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6 text-center">
+            <p class="text-xs text-gray-400">&copy; 2024 CJ. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>    <script>
+        // Resume Modal Functions
+        function openResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            loadResumeContent();
+        }
+
+        function closeResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }  
+
+        // Close modal when clicking outside modal content
+        const resumeModal = document.getElementById('resumeModal');
+        if (resumeModal) {
+            resumeModal.addEventListener('mousedown', function(e) {
+                if (e.target === resumeModal) {
+                    closeResumeModal();
+                }
+            });
+        }
+
+        async function loadResumeContent() {
+            try {
+                const response = await fetch('datas/resume.json');
+                const data = await response.json();
+                const content = document.getElementById('resumeContent');
+                content.innerHTML = `
+            <div class="border-b pb-6 dark:border-gray-700">
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">${data.basics.name}</h3>
+                <p class="text-gray-600 dark:text-gray-200">${data.basics.label}</p>
+                <p class="text-gray-600 dark:text-gray-200">${data.basics.email} | ${data.basics.phone}</p>
+                <p class="text-gray-600 dark:text-gray-200 mt-4">${data.basics.summary}</p>
+            </div>
+            <div class="border-b pb-6 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Education</h3>
+                ${data.education.map(edu => `
+                    <div class="mb-4">
+                        <p class="font-semibold text-gray-800 dark:text-white">${edu.institution}</p>
+                        <p class="text-gray-600 dark:text-gray-200">${edu.studyType} in ${edu.area}</p>
+                        <p class="text-gray-500 dark:text-gray-400">${edu.startDate} - ${edu.endDate}</p>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="border-b pb-6 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Skills</h3>
+                <div class="grid grid-cols-2 gap-4">
+                ${data.skills.map(skill => `
+                    <div class="mb-2">
+                        <p class="font-semibold text-gray-800 dark:text-white">${skill.name}</p>
+                        <p class="text-gray-600 dark:text-gray-200">${skill.keywords.join(', ')}</p>
+                    </div>
+                `).join('')}
+                </div>
+            </div>
+            <div class="border-b pb-6 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Experience</h3>
+                ${data.experience.map(exp => `
+                    <div class="mb-4 bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                        <p class="font-semibold text-primary dark:text-light">${exp.company}</p>
+                        <p class="text-gray-700 dark:text-gray-200">${exp.position} <span class='text-xs text-gray-500 dark:text-gray-400'>(${exp.duration}, ${exp.hours} hours)</span></p>
+                        <p class="text-gray-600 dark:text-gray-200 mt-2">Technologies: <span class="font-medium">${exp.technologies.join(', ')}</span></p>
+                        <ul class="list-disc ml-6 text-gray-600 dark:text-gray-200 mt-2">
+                            ${exp.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Projects</h3>
+                ${data.projects.map(proj => `
+                    <div class="mb-4 bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                        <p class="font-semibold text-primary dark:text-light">${proj.name}</p>
+                        <p class="text-gray-700 dark:text-gray-200">Role: <span class="font-medium">${proj.role}</span></p>
+                        <p class="text-gray-700 dark:text-gray-200">Category: <span class="font-medium">${proj.category}</span></p>
+                        <p class="text-gray-600 dark:text-gray-200 mt-2">Technologies: <span class="font-medium">${proj.technologies.join(', ')}</span></p>
+                        <ul class="list-disc ml-6 text-gray-600 dark:text-gray-200 mt-2">
+                            ${proj.description.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+            } catch (error) {
+                console.error('Error loading resume:', error);
+                document.getElementById('resumeContent').innerHTML = '<p class="text-red-500 dark:text-red-400">Error loading resume content</p>';
+            }
+        }
+
+        // Load timeline experiences
+        async function loadExperiences() {
+            try {
+                const response = await fetch('datas/experience.json');
+                const data = await response.json();
+                const timelineItems = document.getElementById('timeline-items');
+                
+                timelineItems.innerHTML = data.experiences.map((exp, index) => `
+                    <div class="relative flex items-center group">
+                        <div class="hidden md:block w-5/12 ${index % 2 === 0 ? 'text-right pr-8 group-hover:-translate-x-2' : 'ml-auto pl-8 group-hover:translate-x-2'} transition-transform duration-300">
+                            <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary/20">
+                                <span class="inline-block px-3 py-1 bg-primary/10 text-sm font-medium text-secondary dark:text-light rounded-full mb-2">${exp.period}</span>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">${exp.title}</h3>
+                                <p class="text-secondary dark:text-light font-medium">${exp.company}</p>
+                                ${Array.isArray(exp.description)
+                                    ? `<ul class='list-disc ml-6 text-gray-600 dark:text-gray-300 mt-2'>${exp.description.map(d => `<li>${d}</li>`).join('')}</ul>`
+                                    : `<p class='text-gray-600 dark:text-gray-300 mt-2'>${exp.description}</p>`}
+                            </div>
+                        </div>
+                        <div class="absolute left-0 md:left-1/2 w-[30px] h-[30px] bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral rounded-full transform -translate-x-1/2 z-10 shadow-lg group-hover:scale-110 transition-transform duration-300"></div>
+                        <div class="md:hidden pl-12 group-hover:translate-x-2 transition-transform duration-300">
+                            <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary/20">
+                                <span class="inline-block px-3 py-1 bg-primary/10 text-sm font-medium text-secondary dark:text-light rounded-full mb-2">${exp.period}</span>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">${exp.title}</h3>
+                                <p class="text-secondary dark:text-light font-medium">${exp.company}</p>
+                                ${Array.isArray(exp.description)
+                                    ? `<ul class='list-disc ml-6 text-gray-600 dark:text-gray-300 mt-2'>${exp.description.map(d => `<li>${d}</li>`).join('')}</ul>`
+                                    : `<p class='text-gray-600 dark:text-gray-300 mt-2'>${exp.description}</p>`}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading experiences:', error);
+                document.getElementById('timeline-items').innerHTML = '<p class="text-red-500">Error loading experiences</p>';
+            }
+        }
+
+        // Load experiences when the page loads
+        document.addEventListener('DOMContentLoaded', loadExperiences);
+        
+        // Scroll function for project sections
+        function scrollProjects(elementId, amount) {
+            const element = document.getElementById(elementId);
+            element.scrollLeft += amount;
+        }
+        
+        // Navigation hide/show functionality
+        let lastScrollY = window.scrollY;
+        let isNavVisible = true;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && isNavVisible && window.scrollY > 100) {
+                navbar.classList.add('nav-hidden');
+                isNavVisible = false;
+            } else if (window.scrollY < lastScrollY && !isNavVisible) {
+                navbar.classList.remove('nav-hidden');
+                isNavVisible = true;
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Show navigation on hover
+        navbar.addEventListener('mouseenter', () => {
+            navbar.classList.remove('nav-hidden');
+            isNavVisible = true;
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Track active section in navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Dark mode functionality
+        let darkMode = localStorage.getItem('darkMode') === 'enabled';
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('darkMode', null);
+            }
+        });
+
+        async function loadSkills() {
+            try {
+                const response = await fetch('datas/skills.json');
+                const skills = await response.json();
+                const grid = document.getElementById('skills-grid');
+                grid.innerHTML = skills.map(cat => `
+    <div class='skill-card group/card p-6 bg-white dark:bg-gray-800 rounded-2xl border border-primary/30 dark:border-light/30 shadow-lg hover:shadow-xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 transform flex flex-col gap-4'>
+        <div class='flex items-center gap-4 mb-3'>
+            <i class='${cat.icon} text-2xl text-primary dark:text-white'></i>
+            <h3 class='font-bold text-xl text-primary dark:text-light'>${cat.category}</h3>
+        </div>
+        <div class='flex flex-wrap gap-3 mt-2'>
+            ${cat.skills.map(skill => `<span class='inline-block px-4 py-1 rounded-lg bg-primary/20 dark:bg-light/20 text-primary dark:text-light text-base font-semibold shadow hover:bg-primary/30 dark:hover:bg-light/30 transition-colors duration-200'>${skill}</span>`).join('')}
+        </div>
+    </div>
+`).join('');
+            } catch (error) {
+                document.getElementById('skills-grid').innerHTML = '<p class="text-red-500 dark:text-red-400">Error loading skills</p>';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadSkills);
+
+        // Slider logic for poster projects
+let posterIndex = 0;
+let posterImages = [];
+function updatePosterSlider() {
+    const slider = document.getElementById('poster-slider');
+    const slideWidth = slider.children[0]?.offsetWidth || 320;
+    slider.style.transform = `translateX(-${posterIndex * slideWidth}px)`;
+}
+document.getElementById('posterPrev').onclick = function() {
+    if (posterIndex > 0) {
+        posterIndex--;
+    } else {
+        posterIndex = posterImages.length - 1;
+    }
+    updatePosterSlider();
+};
+document.getElementById('posterNext').onclick = function() {
+    if (posterIndex < posterImages.length - 1) {
+        posterIndex++;
+    } else {
+        posterIndex = 0;
+    }
+    updatePosterSlider();
+};
+async function loadProjectImages() {
+    try {
+        const response = await fetch('datas/graphics.json');
+        const data = await response.json();
+        const slider = document.getElementById('poster-slider');
+        posterImages = [];
+        let html = '';
+        if (data.sports) {
+            data.sports.forEach(imgObj => {
+                posterImages.push(imgObj.image);
+                html += `<div class='overflow-hidden min-w-[320px] max-w-[320px] snap-start p-2'>
+                    <img src='assets/projects/graphics/sports/${imgObj.image}' alt='Sports Poster' class='w-80 h-80 object-cover transition-transform duration-300 hover:scale-105'>
+                </div>`;
+            });
+        }
+        if (data.dentalArch) {
+            data.dentalArch.forEach(imgObj => {
+                posterImages.push(imgObj.image);
+                html += `<div class='overflow-hidden min-w-[320px] max-w-[320px] snap-start p-2'>
+                    <img src='assets/projects/graphics/dentalArch/${imgObj.image}' alt='Dental Arch Poster' class='w-80 h-80 object-cover transition-transform duration-300 hover:scale-105'>
+                </div>`;
+            });
+        }
+        slider.innerHTML = html;
+        updatePosterSlider();
+    } catch (error) {
+        document.getElementById('poster-slider').innerHTML = '<p class="text-red-500">Error loading project images</p>';
+    }
+}
+document.addEventListener('DOMContentLoaded', loadProjectImages);
+
+// Slider logic for interface projects
+let interfaceIndex = 0;
+let interfaceImages = [];
+function updateInterfaceSlider() {
+    const slider = document.getElementById('interface-slider');
+    const slideWidth = slider.children[0]?.offsetWidth || 400;
+    slider.style.transform = `translateX(-${interfaceIndex * slideWidth}px)`;
+}
+document.getElementById('interfacePrev').onclick = function() {
+    if (interfaceIndex > 0) {
+        interfaceIndex--;
+    } else {
+        interfaceIndex = interfaceImages.length - 1;
+    }
+    updateInterfaceSlider();
+};
+document.getElementById('interfaceNext').onclick = function() {
+    if (interfaceIndex < interfaceImages.length - 1) {
+        interfaceIndex++;
+    } else {
+        interfaceIndex = 0;
+    }
+    updateInterfaceSlider();
+};
+async function loadInterfaceImages() {
+    try {
+        const response = await fetch('datas/interfaceProjects.json');
+        const data = await response.json();
+        const slider = document.getElementById('interface-slider');
+        interfaceImages = [];
+        let html = '';
+        if (data.interface) {
+            data.interface.forEach(imgObj => {
+                interfaceImages.push(imgObj.image);
+                html += `<div class='overflow-hidden min-w-[400px] max-w-[400px] snap-start p-2'>
+                    <img src='assets/projects/interface/${imgObj.image}' alt='Interface Design' class='w-96 h-56 object-cover transition-transform duration-300 hover:scale-105 rounded-xl'>
+                </div>`;
+            });
+        }
+        slider.innerHTML = html;
+        updateInterfaceSlider();
+    } catch (error) {
+        document.getElementById('interface-slider').innerHTML = '<p class="text-red-500">Error loading interface images</p>';
+    }
+}
+document.addEventListener('DOMContentLoaded', loadInterfaceImages);
+
+        // View All functionality for project carousel
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        const posterProjects = document.getElementById('poster-projects');
+        let isViewAll = false;
+        if (viewAllBtn && posterProjects) {
+            viewAllBtn.addEventListener('click', () => {
+                isViewAll = !isViewAll;
+                if (isViewAll) {
+                    posterProjects.classList.remove('flex', 'overflow-x-auto', 'snap-x', 'snap-mandatory', 'scroll-smooth', 'hide-scrollbar', 'max-w-[calc(300px*4+3rem)]');
+                    posterProjects.classList.add('grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-6', 'max-w-none');
+                    posterProjects.style.scrollBehavior = '';
+                    // Hide fade overlay
+                    const fade = posterProjects.querySelector('.pointer-events-none');
+                    if (fade) fade.style.display = 'none';
+                    viewAllBtn.textContent = 'Show Less';
+                } else {
+                    posterProjects.classList.remove('grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-6', 'max-w-none');
+                    posterProjects.classList.add('flex', 'overflow-x-auto', 'snap-x', 'snap-mandatory', 'scroll-smooth', 'hide-scrollbar', 'max-w-[calc(300px*4+3rem)]');
+                    posterProjects.style.scrollBehavior = 'smooth';
+                    // Show fade overlay
+                    const fade = posterProjects.querySelector('.pointer-events-none');
+                    if (fade) fade.style.display = '';
+                    viewAllBtn.textContent = 'View All';
+                }
+            });
+        }
+        // Scroll animation effect for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-in-view');
+                    } else {
+                        entry.target.classList.remove('scroll-in-view');
+                    }
+                });
+            }, { threshold: 0.2 });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        function downloadResumePDF() {
+            const link = document.createElement('a');
+            link.href = 'assets/MyResume.pdf';
+            link.download = 'MyResume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
