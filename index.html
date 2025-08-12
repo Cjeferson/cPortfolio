@@ -147,6 +147,16 @@
     display: flex !important;
   }
 }
+@media (max-width: 640px) {
+  /* Disable scroll animation for projects section on mobile */
+  #projects.scroll-animate,
+  #projects.scroll-animate.scroll-in-view {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
         }
     </style>
 </head>
