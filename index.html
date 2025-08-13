@@ -43,6 +43,21 @@
         .animate-slide-up {
             animation: slideUp 0.8s ease-out;
         }
+        /* Hide scrollbar but keep functionality */
+#resumeContent {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+#resumeContent::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Optional: Add smooth scrolling */
+#resumeContent {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
         
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -157,6 +172,7 @@
     animation: none !important;
   }
 }
+
         }
     </style>
 </head>
@@ -387,28 +403,40 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>    <script>
         // Resume Modal Functions
-        function openResumeModal() {
-            const modal = document.getElementById('resumeModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            loadResumeContent();
-        }
+        // Resume Modal Functions
+function openResumeModal() {
+    const modal = document.getElementById('resumeModal');
+    modal.classList.remove('hidden');
+    loadResumeContent();
+}
 
-        function closeResumeModal() {
-            const modal = document.getElementById('resumeModal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }  
+function closeResumeModal() {
+    const modal = document.getElementById('resumeModal');
+    modal.classList.add('hidden');
+}
 
-        // Close modal when clicking outside modal content
-        const resumeModal = document.getElementById('resumeModal');
-        if (resumeModal) {
-            resumeModal.addEventListener('mousedown', function(e) {
-                if (e.target === resumeModal) {
-                    closeResumeModal();
-                }
-            });
+// Improved click-outside handler
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('resumeModal');
+    const resumeButton = document.querySelector('button[onclick="openResumeModal()"]');
+    
+    // Proper event delegation for outside clicks
+    document.addEventListener('click', function(event) {
+        const isModal = event.target.closest('#resumeModal .relative');
+        const isResumeButton = event.target.closest('button[onclick="openResumeModal()"]');
+        
+        // If clicking the resume button, open modal
+        if (isResumeButton) {
+            openResumeModal();
+            return;
         }
+        
+        // If clicking outside modal content, close modal
+        if (!isModal && !modal.classList.contains('hidden')) {
+            closeResumeModal();
+        }
+    });
+});
 
         async function loadResumeContent() {
             try {
@@ -737,6 +765,19 @@ async function loadInterfaceImages() {
                 document.getElementById('interfaceNext').style.display = '';
             }
         }
+        // Add click handlers for interface navigation
+document.getElementById('interfaceNext').onclick = function() {
+    const slideWidth = 560; // Adjust this based on your slide width
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    interfaceCurrentSlide = Math.min(interfaceCurrentSlide + slideWidth, maxScroll);
+    slider.style.transform = `translateX(-${interfaceCurrentSlide}px)`;
+};
+
+document.getElementById('interfacePrev').onclick = function() {
+    const slideWidth = 560; // Adjust this based on your slide width
+    interfaceCurrentSlide = Math.max(interfaceCurrentSlide - slideWidth, 0);
+    slider.style.transform = `translateX(-${interfaceCurrentSlide}px)`;
+};
         slider.innerHTML = slides.join('');
     } catch (error) {
         document.getElementById('interface-slider').innerHTML = '<p class="text-red-500">Error loading interface images</p>';
@@ -809,5 +850,26 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.removeChild(link);
         }
     </script>
+<div id="resumeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md">
+    <div class="relative w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+        <div class="absolute top-4 right-4">
+            <button onclick="closeResumeModal()" class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="p-6 sm:p-8 h-full flex flex-col">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">My Resume</h3>
+            <div id="resumeContent" class="overflow-y-auto max-h-[70vh] pr-2 space-y-6">
+                <!-- Resume content will be loaded here -->
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="downloadResumePDF()" class="flex items-center gap-2 px-6 py-2 bg-primary hover:bg-secondary text-white rounded-lg transition-colors duration-300">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
