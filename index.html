@@ -116,67 +116,57 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 640px) {
-          #skills-grid .skill-card {
-            padding: 0.75rem !important;
-            font-size: 0.85rem !important;
-          }
-          #skills-grid .skill-card h3 {
-            font-size: 1rem !important;
-          }
-          #skills-grid .skill-card i {
-            font-size: 1.1rem !important;
-          }
-          #skills-grid .skill-card span {
-            font-size: 0.8rem !important;
-            padding: 0.25rem 0.5rem !important;
-          }
-          @media (max-width: 767px) {
-  /* Remove the timeline dots on mobile */
-  #timeline .absolute.w-\[30px\].h-\[30px\] {
-    display: none;
-  }
-  
-  /* Adjust spacing for cleaner mobile timeline */
-  #timeline-items .relative {
-    margin-bottom: 2rem;
-  }
-}
-@media (min-width: 641px) and (max-width: 1024px) {
-  /* iPad-specific styles */
-  #poster-slider, #interface-slider {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  #poster-slider > div, #interface-slider > div {
-    min-width: 45vw;
-    scroll-snap-align: start;
-  }
-  
-  #posterPrev, #posterNext, 
-  #interfacePrev, #interfaceNext {
-    display: flex !important;
-  }
-  /* Hide GraduateCartoon.png for iPad view */
-  .hidden-lg {
-    display: none !important;
-  }
-}
-@media (max-width: 640px) {
-  /* Disable scroll animation for projects section on mobile */
-  #projects.scroll-animate,
-  #projects.scroll-animate.scroll-in-view {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-}
+        /* Mobile and tablet styles (up to 1420px) */
+        @media (max-width: 1420px) {
+            #skills-grid .skill-card {
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            #skills-grid .skill-card h3 {
+                font-size: 1rem;
+            }
+            #skills-grid .skill-card i {
+                font-size: 1.1rem;
+            }
+            #skills-grid .skill-card span {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            /* Timeline adjustments */
+            #timeline .timeline-dot {
+                display: none;
+            }
+            #timeline-items .relative {
+                margin-bottom: 2rem;
+            }
 
+            /* Projects section */
+            #projects.scroll-animate,
+            #projects.scroll-animate.scroll-in-view {
+                opacity: 1;
+                transform: none;
+                transition: none;
+                animation: none;
+            }
+
+            /* Slider adjustments */
+            #poster-slider, #interface-slider {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1025px) {
+            #poster-slider > div, #interface-slider > div {
+                transform: scale(0.98);
+                transition: transform 0.3s ease;
+            }
+            
+            #poster-slider > div:hover, #interface-slider > div:hover {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -234,13 +224,13 @@
 <section class="relative min-h-screen flex items-center bg-gradient-to-br from-light via-white to-neutral dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
     <div class="container mx-auto px-2 sm:px-4 max-w-screen-2xl relative z-10">
         <div class="grid lg:grid-cols-2 gap-6 md:gap-12 items-center">
-            <!-- Left Side - Content -->
-            <div class="max-w-2xl animate-[fadeIn_1s_ease-out] flex flex-col items-center text-center lg:items-start lg:text-left">
+            <!-- Content - centered on mobile, left-aligned on xl -->
+            <div class="max-w-2xl mx-auto xl:mx-0 animate-[fadeIn_1s_ease-out] flex flex-col items-center xl:items-start text-center xl:text-left">
                 <p class="text-xs sm:text-base uppercase tracking-wider text-secondary dark:text-light mb-2 sm:mb-4 animate-[slideUp_0.8s_ease-out]">Welcome to my portfolio</p>
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-6 text-secondary dark:text-white tracking-tight leading-tight">Hi, I'm <span class="text-secondary dark:text-light">Carl</span></h1>
                 <p class="text-lg sm:text-2xl md:text-4xl text-secondary dark:text-light mb-4 sm:mb-8 leading-relaxed">Graduate of BS Information Technology</p>
-                <div class="flex flex-col sm:flex-row items-center gap-2">
-                    <button onclick="openResumeModal()" class="hidden sm:inline-block px-6 py-3 sm:px-8 sm:py-4 bg-secondary dark:bg-light text-white dark:text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-primary dark:hover:bg-neutral hover:transform hover:-translate-y-1 hover:shadow-lg text-lg sm:text-base">View Resume</button>
+                <div class="flex flex-col sm:flex-row items-center xl:items-start gap-2">
+                    <button data-action="openResume" class="hidden xl:inline-block px-6 py-3 sm:px-8 sm:py-4 bg-secondary dark:bg-light text-white dark:text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-primary dark:hover:bg-neutral hover:transform hover:-translate-y-1 hover:shadow-lg text-lg sm:text-base">View Resume</button>
                     <!-- Social Icons -->
                     <div class="flex items-center gap-2 mt-2 sm:mt-0">
                         <a href="mailto:uricarljeferson@gmail.com" class="w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg flex items-center justify-center transition-all duration-300 hover:bg-red-500 hover:text-white hover:transform hover:-translate-y-1 hover:shadow-lg">
@@ -252,8 +242,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Right Side - Image (hidden on mobile) -->
-            <div class="hidden lg:flex justify-end items-center animate-[fadeIn_1.2s_ease-out_0.3s_both]">
+            <!-- Right Side - Image (hidden below 1420px) -->
+            <div class="hidden xl:flex justify-end items-center animate-[fadeIn_1.2s_ease-out_0.3s_both]">
                 <div class="relative h-[800px]">
                     <img src="assets/GraduateCartoon.png" alt="Carl - Graduate Cartoon" class="w-full max-w-xl h-auto object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
                 </div>
@@ -317,7 +307,7 @@
             </div>
             <div class="relative">                
                 <!-- Timeline Line -->
-                <div class="absolute left-1/2 h-full w-[2px] bg-gradient-to-b from-primary to-secondary dark:from-light dark:to-neutral transform -translate-x-1/2 md:left-1/2"></div>
+                <div class="absolute left-1/2 h-full w-[2px] bg-gradient-to-b from-primary to-secondary dark:from-light dark:to-neutral transform -translate-x-1/2 xl:left-1/2"></div>
                   <!-- Timeline Items -->
                 <div id="timeline-items" class="space-y-12">
                     <!-- Timeline items will be loaded dynamically -->
@@ -406,40 +396,62 @@
 </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>    <script>
-        // Resume Modal Functions
-        // Resume Modal Functions
-function openResumeModal() {
-    const modal = document.getElementById('resumeModal');
-    modal.classList.remove('hidden');
-    loadResumeContent();
-}
+        // Modal functionality
+        const Modal = {
+            init() {
+                this.modal = document.getElementById('resumeModal');
+                this.modalContent = document.querySelector('#resumeModal .relative');
+                this.setupEventListeners();
+            },
 
-function closeResumeModal() {
-    const modal = document.getElementById('resumeModal');
-    modal.classList.add('hidden');
-}
+            setupEventListeners() {
+                // Close on escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+                        this.close();
+                    }
+                });
 
-// Improved click-outside handler
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('resumeModal');
-    const resumeButton = document.querySelector('button[onclick="openResumeModal()"]');
-    
-    // Proper event delegation for outside clicks
-    document.addEventListener('click', function(event) {
-        const isModal = event.target.closest('#resumeModal .relative');
-        const isResumeButton = event.target.closest('button[onclick="openResumeModal()"]');
-        
-        // If clicking the resume button, open modal
-        if (isResumeButton) {
-            openResumeModal();
-            return;
-        }
-        
-        // If clicking outside modal content, close modal
-        if (!isModal && !modal.classList.contains('hidden')) {
-            closeResumeModal();
-        }
-    });
+                // Close on outside click
+                this.modal.addEventListener('click', (e) => {
+                    if (!this.modalContent.contains(e.target)) {
+                        this.close();
+                    }
+                });
+
+                // Prevent click inside modal from closing
+                this.modalContent.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            },
+
+            open() {
+                this.modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                loadResumeContent();
+            },
+
+            close() {
+                this.modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        };
+
+        // Initialize modal functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            Modal.init();
+            
+            // Update click handlers to use Modal object
+            const resumeButtons = document.querySelectorAll('[data-action="openResume"]');
+            const closeButtons = document.querySelectorAll('[data-action="closeResume"]');
+            
+            resumeButtons.forEach(btn => {
+                btn.addEventListener('click', () => Modal.open());
+            });
+            
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', () => Modal.close());
+            });
 });
 
         async function loadResumeContent() {
@@ -517,11 +529,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const timelineItems = document.getElementById('timeline-items');
                 
                 timelineItems.innerHTML = data.experiences.map((exp, index) => {
-                    const isMobile = window.innerWidth < 768;
+                    const isMobile = window.innerWidth < 1420;
                     if (isMobile) {
                         return `
                         <div class="relative flex flex-col items-center mb-10">
-                            <div class="absolute left-1/2 -translate-x-1/2 w-[30px] h-[30px] bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral rounded-full z-10 shadow-lg"></div>
+                            <div class="hidden"></div>
                             <div class="w-full max-w-sm mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
                                 <span class="inline-block px-3 py-1 bg-primary/10 text-sm font-medium text-secondary dark:text-light rounded-full mb-2">${exp.period}</span>
                                 <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-1">${exp.title}</h3>
@@ -575,24 +587,44 @@ document.addEventListener('DOMContentLoaded', function() {
             element.scrollLeft += amount;
         }
         
-        // Navigation hide/show functionality
+        // Enhanced Navigation hide/show functionality with debounce
         let lastScrollY = window.scrollY;
         let isNavVisible = true;
+        let scrollTimeout;
         const navbar = document.getElementById('navbar');
 
-        window.addEventListener('scroll', () => {
+        const debounce = (func, wait) => {
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(scrollTimeout);
+                    func(...args);
+                };
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(later, wait);
+            };
+        };
+
+        const handleScroll = debounce(() => {
             if (window.scrollY > lastScrollY && isNavVisible && window.scrollY > 100) {
                 navbar.classList.add('nav-hidden');
                 isNavVisible = false;
-            } else if (window.scrollY < lastScrollY && !isNavVisible) {
+            } else if (window.scrollY < lastScrollY && !isNavVisible || window.scrollY < 50) {
                 navbar.classList.remove('nav-hidden');
                 isNavVisible = true;
             }
             lastScrollY = window.scrollY;
+        }, 50);
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Show navigation on hover and focus
+        navbar.addEventListener('mouseenter', () => {
+            navbar.classList.remove('nav-hidden');
+            isNavVisible = true;
         });
 
-        // Show navigation on hover
-        navbar.addEventListener('mouseenter', () => {
+        // Ensure navigation is visible when any child element receives focus
+        navbar.addEventListener('focusin', () => {
             navbar.classList.remove('nav-hidden');
             isNavVisible = true;
         });
@@ -677,24 +709,33 @@ async function loadProjectImages() {
         const data = await response.json();
         const slider = document.getElementById('poster-slider');
         let slides = [];
-        const isMobile = window.innerWidth < 640;
-        if (isMobile) {
-            // 2-column grid for mobile
+        const isMobile = window.innerWidth < 1420;
+        // Hide View All button if mobile
+        if (viewAllBtn) {
+            viewAllBtn.style.display = isMobile ? 'none' : '';
+        }
+        const imageTypes = ['sports', 'dentalArch'];        if (isMobile) {
             slides.push('<div class="grid grid-cols-2 gap-2 w-full">');
-            if (data.sports) {
-                data.sports.forEach(imgObj => {
-                    slides.push(`<div class='overflow-hidden w-full p-1'>
-                        <img src='assets/projects/graphics/sports/${imgObj.image}' alt='Sports Poster' class='w-full aspect-square object-cover transition-transform duration-300 hover:scale-105 rounded-xl'>
-                    </div>`);
-                });
-            }
-            if (data.dentalArch) {
-                data.dentalArch.forEach(imgObj => {
-                    slides.push(`<div class='overflow-hidden w-full p-1'>
-                        <img src='assets/projects/graphics/dentalArch/${imgObj.image}' alt='Dental Arch Poster' class='w-full aspect-square object-cover transition-transform duration-300 hover:scale-105 rounded-xl'>
-                    </div>`);
-                });
-            }
+            imageTypes.forEach(type => {
+                if (data[type]) {
+                    data[type].forEach(imgObj => {
+                        slides.push(`
+                            <div class='group overflow-hidden w-full p-1 cursor-pointer'>
+                                <div class='relative overflow-hidden rounded-xl'>
+                                    <img 
+                                        src='assets/projects/graphics/${type}/${imgObj.image}' 
+                                        alt='${type} Poster' 
+                                        class='w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-110'
+                                        loading="lazy"
+                                    >
+                                    <div class='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                }
+            });
             slides.push('</div>');
             // Hide navigation buttons on mobile
             document.getElementById('posterPrev').style.display = 'none';
@@ -743,7 +784,7 @@ async function loadInterfaceImages() {
         const data = await response.json();
         const slider = document.getElementById('interface-slider');
         let slides = [];
-        const isMobile = window.innerWidth < 640;
+        const isMobile = window.innerWidth < 1420;
         if (data.interface) {
             if (isMobile) {
                 // 1-column grid for mobile
@@ -857,7 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="resumeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md">
     <div class="relative w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
         <div class="absolute top-4 right-4">
-            <button onclick="closeResumeModal()" class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <button data-action="closeResume" class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                 <i class="fas fa-times text-xl"></i>
             </button>
         </div>
