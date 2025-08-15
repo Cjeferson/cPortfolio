@@ -3,7 +3,7 @@
         "name": "Carl Jeferson I. Uri",
         "label": "Bachelor of Science in Information Technology",
         "email": "uricarljeferson@gmail.com",
-        "phone": "(555) 555-5555",
+        
         "summary": "A Bachelor of Science in Information Technology graduate with major in Network Technology. Experienced hands-on in Web Development, IoT Systems, and Creative Design. Built multiple projects using HTML, CSS, JavaScript, PHP, Firebase, and Arduino. Familiar with system administration and basic AWS cloud services. Eager to join a dynamic team to grow and I can apply these skills in a collaborative environment."
     },
     "education": [
@@ -128,4 +128,5 @@
       "category": "Web Development"
     }
   ]
+
 }
