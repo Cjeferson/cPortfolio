@@ -632,3 +632,25 @@ function downloadResumePDF() {
   link.click();
   document.body.removeChild(link);
 }
+
+function updateEmailLinks() {
+  const emailLinks = document.querySelectorAll(".dynamic-email-link");
+  const isSmallScreen = window.innerWidth < 1420;
+
+  emailLinks.forEach((link) => {
+    if (isSmallScreen) {
+      // Use mailto: for small screens
+      link.href = "mailto:uricarljeferson@gmail.com";
+      link.removeAttribute("target");
+    } else {
+      // Use Gmail web link for larger screens
+      link.href =
+        "https://mail.google.com/mail/?view=cm&to=uricarljeferson@gmail.com";
+      link.setAttribute("target", "_blank");
+    }
+  });
+}
+
+// Run on load and when window is resized
+window.addEventListener("load", updateEmailLinks);
+window.addEventListener("resize", updateEmailLinks);
