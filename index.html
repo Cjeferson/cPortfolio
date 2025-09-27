@@ -61,16 +61,6 @@
               ></div>
             </a>
             <a
-              href="#timeline"
-              class="nav-link text-lg text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light transition-colors duration-300 relative group"
-              data-section="timeline"
-            >
-              Experience
-              <div
-                class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary dark:bg-light scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-              ></div>
-            </a>
-            <a
               href="#projects"
               class="nav-link text-lg text-gray-600 hover:text-primary dark:text-gray-200 dark:hover:text-light transition-colors duration-300 relative group"
               data-section="projects"
@@ -124,16 +114,6 @@
               ></div>
             </a>
             <a
-              href="#timeline"
-              class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 relative group"
-              data-section="timeline"
-            >
-              Experience
-              <div
-                class="absolute -bottom-2 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-              ></div>
-            </a>
-            <a
               href="#projects"
               class="nav-link text-gray-600 hover:text-primary transition-colors duration-300 relative group"
               data-section="projects"
@@ -155,7 +135,7 @@
         class="container mx-auto px-2 sm:px-4 max-w-screen-2xl relative z-10"
       >
         <div class="grid lg:grid-cols-2 gap-6 md:gap-12 items-center">
-          <!-- Content - centered on mobile, left-aligned on xl -->
+          <!-- Content -->
           <div
             class="max-w-2xl mx-auto xl:mx-0 animate-[fadeIn_1s_ease-out] flex flex-col items-center xl:items-start text-center xl:text-left"
           >
@@ -177,12 +157,12 @@
             <div class="flex items-center gap-2">
               <!-- Social Icons -->
               <div class="flex items-center gap-2">
-                <button
+                <!-- <button
                   data-action="openResume"
                   class="w-auto px-4 h-12 sm:w-auto sm:h-14 bg-secondary dark:bg-light text-white dark:text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-primary dark:hover:bg-neutral hover:transform hover:-translate-y-1 hover:shadow-lg text-base"
                 >
                   View Resume
-                </button>
+                </button> -->
                 <a
                   id="emailLink"
                   href="https://mail.google.com/mail/?view=cm&to=uricarljeferson@gmail.com"
@@ -203,7 +183,7 @@
               </div>
             </div>
           </div>
-          <!-- Right Side - Image (hidden below 1420px) -->
+          <!-- Right Side - Image -->
           <div
             class="hidden xl:flex justify-end items-center animate-[fadeIn_1.2s_ease-out_0.3s_both]"
           >
@@ -317,36 +297,6 @@
       </div>
     </section>
 
-    <!-- Timeline Section -->
-    <section
-      id="timeline"
-      class="py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 relative overflow-hidden scroll-animate"
-    >
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"
-      ></div>
-      <div class="container mx-auto px-4 max-w-screen-2xl relative">
-        <div class="relative mb-12">
-          <h2 class="text-4xl font-bold text-gray-800 gradient-text">
-            Experience
-          </h2>
-          <div
-            class="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-primary to-secondary dark:from-light dark:to-neutral"
-          ></div>
-        </div>
-        <div class="relative">
-          <!-- Timeline Line -->
-          <div
-            class="absolute left-1/2 h-full w-[2px] bg-gradient-to-b from-primary to-secondary dark:from-light dark:to-neutral transform -translate-x-1/2 xl:left-1/2"
-          ></div>
-          <!-- Timeline Items -->
-          <div id="timeline-items" class="space-y-12">
-            <!-- Timeline items will be loaded dynamically -->
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Projects Section -->
     <section
       id="projects"
@@ -444,12 +394,6 @@
                 style="transform: translateX(0)"
               >
                 <!-- Images will be loaded here by JS -->
-                <!-- Example for responsive image sizing -->
-                <!--
-                            <div class="overflow-hidden min-w-[180px] max-w-[180px] sm:min-w-[320px] sm:max-w-[320px] md:min-w-[560px] md:max-w-[560px] snap-start p-2">
-                                <img src="assets/projects/interface/example.png" alt="Interface Design" class="w-[170px] h-[90px] sm:w-[300px] sm:h-[170px] md:w-[540px] md:h-[240px] object-cover transition-transform duration-300 hover:scale-105 rounded-xl">
-                            </div>
-                            -->
               </div>
             </div>
             <button
@@ -546,4 +490,3 @@
     </div>
   </body>
 </html>
-
