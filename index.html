@@ -38,7 +38,7 @@
     transform: translateY(0) !important;
   }
 
-  /* Highlight on active or hover */
+  /* Active/hover color */
   .navbar-nav .nav-link.active,
   .navbar-nav .nav-link:hover {
     color: #e6c647 !important;
@@ -51,26 +51,54 @@
 <script>
   const navbar = document.getElementById("mainNavbar");
 
-  // Show navbar when mouse is near the top (within 20px of top)
+  function handleNavbar() {
+    if (window.innerWidth <= 768) {
+      // 📱 Mobile / small device behavior
+      if (window.scrollY === 0) {
+        navbar.classList.add("navbar-visible"); // show only at top
+      } else {
+        navbar.classList.remove("navbar-visible");
+      }
+    } else {
+      // 💻 Desktop / large screen behavior
+      if (window.scrollY === 0) {
+        navbar.classList.add("navbar-visible");
+      } else {
+        navbar.classList.remove("navbar-visible");
+      }
+    }
+  }
+
+  // Desktop extra: show on hover when not at top
   document.addEventListener("mousemove", function(e) {
-    if (e.clientY <= 20) {
+    if (window.innerWidth > 768 && window.scrollY > 0) {
+      if (e.clientY <= 20) {
+        navbar.classList.add("navbar-visible");
+      } else if (!navbar.matches(":hover")) {
+        navbar.classList.remove("navbar-visible");
+      }
+    }
+  });
+
+  navbar.addEventListener("mouseenter", () => {
+    if (window.innerWidth > 768) {
       navbar.classList.add("navbar-visible");
-    } else if (!navbar.matches(":hover")) {
-      // hide again if mouse moves away and not hovering on nav
+    }
+  });
+
+  navbar.addEventListener("mouseleave", () => {
+    if (window.innerWidth > 768 && window.scrollY > 0) {
       navbar.classList.remove("navbar-visible");
     }
   });
 
-  // Keep navbar open while hovering it
-  navbar.addEventListener("mouseenter", function() {
-    navbar.classList.add("navbar-visible");
-  });
+  // Listen to scroll + resize
+  window.addEventListener("scroll", handleNavbar);
+  window.addEventListener("resize", handleNavbar);
 
-  navbar.addEventListener("mouseleave", function() {
-    navbar.classList.remove("navbar-visible");
-  });
+  // Initial state
+  handleNavbar();
 </script>
-
 
 
 <!-- Landing Page -->
@@ -189,6 +217,7 @@
     .container-fluid {
       min-height: auto;
       padding: 20px 15px;
+      margin-top: 70px;
     }
     .hero-img {
       max-width: 85%;
