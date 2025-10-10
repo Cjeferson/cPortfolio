@@ -487,9 +487,9 @@
   .swiper-container {
     width: 100%;
     max-width: 100%;
-    height: auto;
     margin: 0 auto;
     overflow: hidden;
+    transition: all 0.5s ease; /* Smooth resize transition */
   }
 
   .swiper-slide {
@@ -497,7 +497,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, width 0.4s ease;
   }
 
   /* Always show black shadow behind */
@@ -518,7 +518,7 @@
     border-radius: 10px;
     position: relative;
     z-index: 2;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, width 0.4s ease;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 
@@ -535,6 +535,37 @@
   .swiper-button-next,
   .swiper-button-prev {
     display: none;
+  }
+
+  /* --- Responsive Scaling --- */
+  @media (max-width: 1200px) {
+    .swiper-slide img {
+      transform: scale(0.95);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .swiper-slide img {
+      transform: scale(0.9);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .swiper-slide img {
+      transform: scale(0.85);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .swiper-slide img {
+      transform: scale(0.8);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .swiper-slide img {
+      transform: scale(0.75);
+    }
   }
 </style>
 
@@ -568,7 +599,6 @@
 <script>
   var mySwiper = new Swiper('.swiper-container', {
     loop: true,
-    slidesPerView: 2,
     centeredSlides: true,
     effect: 'coverflow',
     coverflowEffect: {
@@ -579,11 +609,19 @@
     },
     autoplay: {
       delay: 5000, // Auto-slide every 5 seconds
-      disableOnInteraction: false, // Continue autoplay even after manual swipe/click
+      disableOnInteraction: false,
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
+    },
+
+    // Responsive breakpoints
+    breakpoints: {
+      1400: { slidesPerView: 3 },
+      992: { slidesPerView: 2 },
+      768: { slidesPerView: 1.5 },
+      576: { slidesPerView: 1 },
     },
   });
 
@@ -604,8 +642,6 @@
     }
   });
 </script>
-
-
 
 
 <!-- Sports Gallery -->
