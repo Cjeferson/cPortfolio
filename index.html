@@ -487,9 +487,9 @@
   .swiper-container {
     width: 100%;
     max-width: 100%;
+    height: auto;
     margin: 0 auto;
     overflow: hidden;
-    transition: all 0.5s ease; /* Smooth resize transition */
   }
 
   .swiper-slide {
@@ -497,32 +497,22 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: transform 0.4s ease, width 0.4s ease;
-  }
-
-  /* Always show black shadow behind */
-  .swiper-slide::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    z-index: 1;
     transition: transform 0.4s ease;
   }
 
-  /* Image styling */
+  /* Image styling only (no shadow behind) */
   .swiper-slide img {
     width: 100%;
     height: auto;
+    display: block;
     border-radius: 10px;
     position: relative;
     z-index: 2;
-    transition: transform 0.4s ease, width 0.4s ease;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    object-fit: cover;
   }
 
-  /* Hover anywhere on the slide — both image and shadow scale together */
+  /* Hover effect */
   .swiper-slide:hover {
     transform: scale(1.05);
     z-index: 3;
@@ -532,39 +522,28 @@
     cursor: pointer;
   }
 
+  /* Navigation buttons */
   .swiper-button-next,
   .swiper-button-prev {
-    display: none;
+    color: white;
+    transition: opacity 0.3s ease;
   }
 
-  /* --- Responsive Scaling --- */
-  @media (max-width: 1200px) {
+  /* Hide arrows and slightly scale down images on mobile */
+  @media (max-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
+
     .swiper-slide img {
       transform: scale(0.95);
     }
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 480px) {
     .swiper-slide img {
       transform: scale(0.9);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .swiper-slide img {
-      transform: scale(0.85);
-    }
-  }
-
-  @media (max-width: 576px) {
-    .swiper-slide img {
-      transform: scale(0.8);
-    }
-  }
-
-  @media (max-width: 400px) {
-    .swiper-slide img {
-      transform: scale(0.75);
     }
   }
 </style>
@@ -592,6 +571,7 @@
     </div>
   </div>
 
+  <!-- Optional navigation buttons -->
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
 </div>
@@ -608,32 +588,41 @@
       modifier: 1,
     },
     autoplay: {
-      delay: 5000, // Auto-slide every 5 seconds
+      delay: 5000,
       disableOnInteraction: false,
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    slidesPerView: 2,
+    spaceBetween: 30,
 
     // Responsive breakpoints
     breakpoints: {
-      1400: { slidesPerView: 3 },
-      992: { slidesPerView: 2 },
-      768: { slidesPerView: 1.5 },
-      576: { slidesPerView: 1 },
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
     },
   });
 
   // Click on side slides to navigate
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     var clickedSlide = e.target.closest('.swiper-slide');
     if (clickedSlide && !clickedSlide.classList.contains('swiper-slide-active')) {
       var slides = Array.from(document.querySelectorAll('.swiper-slide'));
       var activeSlide = document.querySelector('.swiper-slide-active');
       var clickedIndex = slides.indexOf(clickedSlide);
       var activeIndex = slides.indexOf(activeSlide);
-      
       if (clickedIndex < activeIndex) {
         mySwiper.slidePrev();
       } else {
