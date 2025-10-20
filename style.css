@@ -357,3 +357,40 @@ footer a[href="#home"]:hover i { color: #c50607 !important; }
 @media (max-width: 430px) {
   footer > div:first-child > div:first-child h2 { font-size: 48px !important; }
 }
+
+/* Large screens: increase UI/Mockup headings and split UI heading into two lines */
+@media (min-width: 992px) {
+  /* make the UI heading much larger on desktops */
+  .ui-designs-heading {
+    font-size: clamp(2.6rem, 2.6vw + 1.2rem, 4.4rem) !important;
+    line-height: 0.95 !important;
+    white-space: normal !important; /* allow wrapping */
+    text-align: right !important;
+  }
+
+  /* force the two words to sit on their own line for a stacked look */
+  .ui-designs-heading .ui-word1,
+  .ui-designs-heading .ui-word2 {
+    display: block;
+  }
+
+  /* ensure left column keeps its right alignment on large screens */
+  .ui-designs-left {
+    align-items: flex-end !important;
+    text-align: right !important;
+    padding-right: 30px !important;
+  }
+
+  /* enlarge mockup heading on large screens */
+  .mockup-heading {
+    font-size: clamp(2rem, 1.8vw + 1rem, 3rem) !important;
+    line-height: 1 !important;
+    margin-bottom: 14px !important;
+  }
+}
+
+/* Extra-large screens: push sizes slightly further for very wide displays */
+@media (min-width: 1400px) {
+  .ui-designs-heading { font-size: 5rem !important; }
+  .mockup-heading { font-size: 3.6rem !important; }
+}
