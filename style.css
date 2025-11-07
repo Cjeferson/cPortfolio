@@ -393,6 +393,7 @@ body {
     .staggered-gallery {
       gap: 20px;
       padding: 20px;
+      grid-template-columns: repeat(4, 1fr); /* 4 pictures per row on medium devices */
     }
     .staggered-gallery div:nth-child(odd) {
       margin-top: 0; /* Remove staggered effect on smaller screens */
@@ -400,7 +401,7 @@ body {
 }
 @media (max-width: 576px) {
   .staggered-gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 images per row */
+    grid-template-columns: repeat(2, 1fr); /* 2 pictures per row on smaller devices */
     gap: 15px;
     padding: 15px;
   }
