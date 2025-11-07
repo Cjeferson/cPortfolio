@@ -1,6 +1,9 @@
-/* Extracted stylesheet for index.html */
-
 /* Navbar visibility */
+#mainNavbar {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
 #mainNavbar.navbar-visible {
   transform: translateY(0) !important;
 }
@@ -11,7 +14,44 @@
   color: #e6c647 !important;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed navbar */
+}
+
+/* Progress bar styling */
+.scroll-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: #e6c647;
+    width: 0%;
+    transition: width 0.2s ease;
+}
+
+/* Active section indicator - changed from dot to line */
+.nav-link.current {
+    position: relative;
+}
+
+.nav-link.current::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e6c647;
+    border-radius: 0;
+}
+
 /* Prevent iOS/Safari from auto-adjusting font sizes */
 html, body {
   /* Disable iOS/Safari text inflation — strong override */
@@ -19,7 +59,11 @@ html, body {
   -ms-text-size-adjust: none !important;
   text-size-adjust: none !important;
 }
-body { padding-top: 0; }
+body { 
+    padding-top: 0; 
+    font-family: 'Poppins', sans-serif; 
+    background-color: #f8f9f9;
+}
 
 /* Scoped styles for home section only */
 #home.container-fluid {
@@ -90,6 +134,7 @@ body { padding-top: 0; }
 }
 
 /* === Smooth fade-up animation === */
+/* (replace immediate-play behavior with an "in-view" trigger) */
 @keyframes fadeUp {
     from {
       opacity: 0;
@@ -101,9 +146,96 @@ body { padding-top: 0; }
     }
 }
 
-#home .animate-fade-up {
-    opacity: 0;
-    animation: fadeUp 1.1s ease-out forwards;
+/* baseline hidden state for elements that will reveal on scroll */
+.animate-fade-up,
+.animate-on-scroll,
+.staggered-gallery div,
+.logo-item,
+.ui-designs-left,
+.ui-designs-right,
+.mockup-section img,
+.ui-designs-heading,
+.mockup-heading,
+.ui-designs-desc,    /* Added */
+.mockup-desc {       /* Added */
+      opacity: 0;
+      transform: translateY(18px);
+      will-change: opacity, transform;
+      transition: opacity 520ms cubic-bezier(.22,.9,.35,1), transform 520ms cubic-bezier(.22,.9,.35,1);
+}
+
+/* trigger keyframe for elements that expect the fadeUp motion */
+.animate-fade-up.in-view {
+  animation: fadeUp 760ms ease-out forwards;
+}
+
+/* generic reveal final state for elements using transitions */
+.animate-on-scroll.in-view,
+.staggered-gallery div.in-view,
+.logo-item.in-view,
+.ui-designs-left.in-view,
+.ui-designs-right.in-view,
+.mockup-section img.in-view,
+.ui-designs-heading.in-view,
+.mockup-heading.in-view,
+.ui-designs-desc.in-view,    /* Added */
+.mockup-desc.in-view,        /* Added */
+.carousel-container.in-view,    /* Added */
+.video-wrapper.in-view {        /* Added */
+      opacity: 1;
+      transform: translateY(0);
+}
+
+/* Slide-in variants (used by JS to pick a direction) */
+.slide-left,
+.slide-right,
+.slide-up {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 520ms cubic-bezier(.22,.9,.35,1), opacity 520ms cubic-bezier(.22,.9,.35,1);
+}
+
+/* starting offsets */
+.slide-left { transform: translateX(-28px); }
+.slide-right { transform: translateX(28px); }
+.slide-up { transform: translateY(18px); }
+
+/* final state when element is revealed */
+.slide-left.in-view,
+.slide-right.in-view,
+.slide-up.in-view {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+}
+
+/* Pop reveal: small translate + scale down baseline, then pop to full size + opacity when in-view.
+   Uses transitions so hiding also animates (works when scrolling up or down). */
+.pop,
+.staggered-gallery div,
+.logo-item,
+.ui-designs-left,
+.ui-designs-right,
+.mockup-section img,
+.ui-designs-heading,
+.mockup-heading {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transform-origin: center;
+  will-change: opacity, transform;
+  transition: opacity 420ms cubic-bezier(.2,.9,.3,1), transform 420ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Final visible state (the "pop") */
+.pop.in-view,
+.staggered-gallery div.in-view,
+.logo-item.in-view,
+.ui-designs-left.in-view,
+.ui-designs-right.in-view,
+.mockup-section img.in-view,
+.ui-designs-heading.in-view,
+.mockup-heading.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* === Responsive adjustments === */
@@ -225,25 +357,54 @@ body { padding-top: 0; }
 
 /* Staggered gallery */
 .staggered-gallery {
-  width: 100%;
-  padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 25px;
+    width: 100%;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
 }
 
-.staggered-gallery div { overflow: hidden; border-radius: 12px; transition: all 0.3s ease; }
-.staggered-gallery div:hover { transform: scale(1.08); z-index: 2; }
-
-@media (min-width: 992px) {
-  .staggered-gallery div:nth-child(odd) { transform: translateY(20px); }
-  .staggered-gallery div:nth-child(odd):hover { transform: translateY(20px) scale(1.08); }
+.staggered-gallery div {
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
-.staggered-gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.staggered-gallery div:hover {
+    transform: scale(1.08);
+    z-index: 2;
+}
 
-@media (max-width: 991px) { .staggered-gallery { gap: 20px; padding: 20px; } }
-@media (max-width: 576px) { .staggered-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; padding: 15px; } }
+/* Add staggered effect using margin-top */
+.staggered-gallery div:nth-child(odd) {
+    margin-top: -20px;
+}
+
+.staggered-gallery img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 991px) {
+    .staggered-gallery {
+      gap: 20px;
+      padding: 20px;
+    }
+    .staggered-gallery div:nth-child(odd) {
+      margin-top: 0; /* Remove staggered effect on smaller screens */
+    }
+}
+@media (max-width: 576px) {
+  .staggered-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+}
 
 /* Swiper styles */
 .swiper-container { width: 100%; max-width: 100%; height: auto; margin: 0 auto; overflow: hidden; }
@@ -306,10 +467,12 @@ footer a[href="#home"]:hover i { color: #c50607 !important; }
   font-size: clamp(0.95rem, 1.2vw + 0.6rem, 1.1rem);
 }
 .mockup-heading {
-  font-size: clamp(1.3rem, 3.2vw + 0.8rem, 2.2rem) !important;
+  /* Match UI designs font size */
+  font-size: clamp(1.4rem, 4.5vw + 0.8rem, 2.6rem) !important;
 }
 .mockup-desc {
-  font-size: clamp(0.95rem, 1.05vw + 0.5rem, 1.1rem);
+  /* Match UI designs description size */
+  font-size: clamp(0.95rem, 1.2vw + 0.6rem, 1.1rem);
 }
 
 /* Additional hard cap for very small devices (narrow iPhones) */
@@ -345,35 +508,55 @@ footer a[href="#home"]:hover i { color: #c50607 !important; }
 
 /* Footer improvements for small screens */
 @media (max-width: 768px) {
-  footer { padding: 40px 20px 20px 20px !important; }
-  footer > div:first-child { padding: 20px 20px 30px 20px !important; }
-  footer h2 { font-size: 48px !important; }
-  footer .row { margin-top: 40px !important; }
-  footer .col-md-3, footer .col-md-6 { text-align: center !important; }
-  /* reduce huge background text visibility on small screens */
-  footer > div:first-child > div:first-child h2 { font-size: 80px !important; opacity: 0.06 !important; }
+  footer {
+    padding: 40px 20px 20px 20px !important;
+  }
+  footer > div:first-child {
+    padding: 20px 20px 30px 20px !important;
+  }
+  footer h2 {
+    font-size: 48px !important;
+  }
+  footer .row {
+    margin-top: 40px !important;
+  }
+  footer .col-md-3,
+  footer .col-md-6 {
+    text-align: center !important;
+  }
 }
 
-@media (max-width: 430px) {
-  footer > div:first-child > div:first-child h2 { font-size: 48px !important; }
-}
-
-/* Large screens: increase UI/Mockup headings and split UI heading into two lines */
+/* Large screens: increase UI/Mockup headings */
 @media (min-width: 992px) {
-  /* make the UI heading much larger on desktops */
-  .ui-designs-heading {
+  /* make both headings much larger on desktops */
+  .ui-designs-heading,
+  .mockup-heading {
     font-size: clamp(2.6rem, 2.6vw + 1.2rem, 4.4rem) !important;
     line-height: 0.95 !important;
-    white-space: normal !important; /* allow wrapping */
-    text-align: right !important;
+    white-space: normal !important;
   }
 
-  /* force the two words to sit on their own line for a stacked look */
+  /* force UI words to sit on their own line */
   .ui-designs-heading .ui-word1,
   .ui-designs-heading .ui-word2 {
     display: block;
   }
 
+  /* Keep MOCKUP & on same line, TEMPLATES on new line with consistent left alignment */
+  .mockup-heading {
+    text-align: left !important;
+  }
+  
+  .mockup-heading .mockup-row1,
+  .mockup-heading .mockup-row2 {
+    display: block;
+    text-align: left;
+  }
+  
+  .mockup-heading .mockup-row1 {
+    white-space: nowrap;
+  }
+  
   /* ensure left column keeps its right alignment on large screens */
   .ui-designs-left {
     align-items: flex-end !important;
@@ -389,8 +572,216 @@ footer a[href="#home"]:hover i { color: #c50607 !important; }
   }
 }
 
-/* Extra-large screens: push sizes slightly further for very wide displays */
+/* Extra-large screens: push sizes further for very wide displays */
 @media (min-width: 1400px) {
-  .ui-designs-heading { font-size: 5rem !important; }
-  .mockup-heading { font-size: 3.6rem !important; }
+  .ui-designs-heading,
+  .mockup-heading { 
+    font-size: 5rem !important; 
+  }
+}
+
+/* Mockup section improvements */
+.mockup-section .row {
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .mockup-section .col-lg-4 {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .mockup-section .mockup-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .mockup-section .col-lg-4 {
+    padding-left: 40px;
+  }
+  
+  .mockup-heading .mockup-word1,
+  .mockup-heading .mockup-word2 {
+    display: block;
+  }
+}
+
+/* Carousel improvements */
+.carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Prevent white flash during transitions */
+#mockup-carousel {
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+#mockup-carousel > div {
+  transition: none;
+}
+
+/* Remove any other transition effects */
+#mockup-carousel img {
+  transition: none;
+}
+
+/* Video sections improvements */
+.video-wrapper {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 600px !important; /* removed */
+width: fit-content; /* added - now wraps to video width */
+display: inline-block; /* changed from flex to inline-block */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Small video container: constrains the wrapper while remaining responsive */
+.video-wrapper--small {
+  display: inline-block;   /* shrink-wrap to the video's width */
+  width: auto;
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Use responsive width so video fills its column (column size controls displayed size) */
+.video-wrapper--small video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.video-section video {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 900px; /* increased to allow larger videos */
+  object-fit: contain;
+}
+
+/* NMV-specific tighter gutters so text sits closer to the video */
+.nmv-row .col-lg-8 { padding-right: 8px; }
+.nmv-row .col-lg-4 { padding-left: 8px; }
+
+/* Social Media Posters: 40% video / 60% text on large screens with tight gap (increased video size) */
+@media (min-width: 992px) {
+  .poster-row .col-lg-4 { flex: 0 0 40%; max-width: 40%; padding-right: 6px; }
+  .poster-row .col-lg-8 { flex: 0 0 60%; max-width: 60%; padding-left: 6px; }
+}
+
+/* Ensure small video wrapper fills the 30% column */
+.poster-row .video-wrapper--small { width: 100%; display: block; margin: 0; }
+.poster-row .video-wrapper--small video { width: 100%; height: auto; display: block; }
+
+/* Helpers for responsive stacking and smooth resizing */
+.video-col,
+.text-col {
+  will-change: width, height, transform, opacity;
+  transition: all 300ms ease;
+}
+
+/* Ensure carousels/videos resize smoothly */
+.video-wrapper,
+#ui-carousel,
+#mockup-carousel {
+  transition: width 300ms ease, height 300ms ease, transform 300ms ease;
+  will-change: width, height, transform;
+}
+
+/* Poster row: ensure on small screens media stacks below text and text is centered */
+@media (max-width: 991px) {
+  .poster-row .video-col,
+  .poster-row .text-col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Force text first and media second on small screens (text above carousel/video) */
+  .poster-row .text-col  { order: 0; text-align: center !important; padding-top: 18px; padding-bottom: 18px; }
+  .poster-row .video-col { order: 1; }
+
+  /* Make headings centered and friendly on small screens for all project sections */
+  .poster-row .ui-designs-heading,
+  .poster-row .mockup-heading,
+  .ui-designs-inner .ui-designs-heading,
+  .mockup-section .mockup-heading {
+    text-align: center !important;
+  }
+}
+
+/* Ensure mockup and UI sections also collapse into a single column with text first */
+@media (max-width: 991px) {
+  .mockup-section .col-lg-4,
+  .mockup-section .col-lg-8,
+  .ui-designs-inner .ui-designs-left,
+  .ui-designs-inner .ui-designs-right {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* For mockup: text column first, carousel second */
+  .mockup-section .col-lg-4 { order: 0; text-align: center !important; padding-bottom: 18px; }
+  .mockup-section .col-lg-8 { order: 1; }
+
+  /* For UI Designs: ensure text (left) stays above the carousel on small screens */
+  .ui-designs-inner .ui-designs-left { order: 0; text-align: center !important; padding-bottom: 18px; }
+  .ui-designs-inner .ui-designs-right { order: 1; }
+}
+
+/* Add carousel and video animations */
+.animate-fade-up,
+.animate-on-scroll,
+.staggered-gallery div,
+.logo-item,
+.ui-designs-left,
+.ui-designs-right,
+.mockup-section img,
+.ui-designs-heading,
+.mockup-heading,
+.ui-designs-desc,
+.mockup-desc,
+.carousel-container,     /* Added */
+.video-wrapper {         /* Added */
+  opacity: 0;
+  transform: translateY(18px);
+  will-change: opacity, transform;
+  transition: opacity 520ms cubic-bezier(.22,.9,.35,1), transform 520ms cubic-bezier(.22,.9,.35,1);
+}
+
+/* Update the final animation state */
+.animate-on-scroll.in-view,
+.staggered-gallery div.in-view,
+.logo-item.in-view,
+.ui-designs-left.in-view,
+.ui-designs-right.in-view,
+.mockup-section img.in-view,
+.ui-designs-heading.in-view,
+.mockup-heading.in-view,
+.ui-designs-desc.in-view,
+.mockup-desc.in-view,
+.carousel-container.in-view,    /* Added */
+.video-wrapper.in-view {        /* Added */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Update subheading color in social media poster content section */
+#social-media-posters .mockup-desc {
+    color: #555 !important;
+}
+
+.video-section .ui-designs-desc {
+    color: #555 !important;
 }
