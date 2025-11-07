@@ -784,3 +784,28 @@ display: inline-block; /* changed from flex to inline-block */
 .video-section .ui-designs-desc {
     color: #373737 !important; /* Updated font color */
 }
+
+/* Responsive adjustments for "Other" section gallery */
+.staggered-gallery {
+  display: grid;
+  gap: 15px;
+}
+
+@media (max-width: 991px) {
+  .staggered-gallery {
+    grid-template-columns: repeat(4, 1fr); /* 4 images per row on medium devices */
+  }
+}
+
+@media (max-width: 576px) {
+  .staggered-gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row on smaller devices */
+  }
+}
+
+/* Ensure perfect alignment for rows and columns */
+.staggered-gallery div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
