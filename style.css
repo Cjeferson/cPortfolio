@@ -400,7 +400,7 @@ body {
 }
 @media (max-width: 576px) {
   .staggered-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row */
     gap: 15px;
     padding: 15px;
   }
@@ -740,48 +740,38 @@ display: inline-block; /* changed from flex to inline-block */
   .ui-designs-inner .ui-designs-right { order: 1; }
 }
 
-/* Add carousel and video animations */
-.animate-fade-up,
-.animate-on-scroll,
-.staggered-gallery div,
-.logo-item,
-.ui-designs-left,
-.ui-designs-right,
-.mockup-section img,
-.ui-designs-heading,
-.mockup-heading,
-.ui-designs-desc,
-.mockup-desc,
-.carousel-container,     /* Added */
-.video-wrapper {         /* Added */
-  opacity: 0;
-  transform: translateY(18px);
-  will-change: opacity, transform;
-  transition: opacity 520ms cubic-bezier(.22,.9,.35,1), transform 520ms cubic-bezier(.22,.9,.35,1);
+/* Social Media Posters: Responsive adjustments */
+@media (max-width: 991px) {
+  .video-section .row {
+    flex-direction: column; /* Stack into one column */
+    text-align: center; /* Center align text */
+  }
+
+  .video-section .text-col {
+    order: 0; /* Title and description first */
+    padding-bottom: 20px;
+  }
+
+  .video-section .video-col {
+    order: 1; /* Video second */
+  }
+
+  .video-section .ui-designs-heading {
+    text-align: center !important;
+  }
+
+  .video-section .ui-designs-desc {
+    text-align: center !important;
+    margin: 0 auto;
+  }
 }
 
-/* Update the final animation state */
-.animate-on-scroll.in-view,
-.staggered-gallery div.in-view,
-.logo-item.in-view,
-.ui-designs-left.in-view,
-.ui-designs-right.in-view,
-.mockup-section img.in-view,
-.ui-designs-heading.in-view,
-.mockup-heading.in-view,
-.ui-designs-desc.in-view,
-.mockup-desc.in-view,
-.carousel-container.in-view,    /* Added */
-.video-wrapper.in-view {        /* Added */
-  opacity: 1;
-  transform: translateY(0);
-}
+@media (max-width: 576px) {
+  .video-section .ui-designs-heading {
+    font-size: 1.5rem !important; /* Adjust title size */
+  }
 
-/* Update subheading color in social media poster content section */
-#social-media-posters .mockup-desc {
-    color: #555 !important;
-}
-
-.video-section .ui-designs-desc {
-    color: #555 !important;
+  .video-section .ui-designs-desc {
+    font-size: 1rem !important; /* Adjust description size */
+  }
 }
