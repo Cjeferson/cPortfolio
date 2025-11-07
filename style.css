@@ -775,3 +775,9 @@ display: inline-block; /* changed from flex to inline-block */
     font-size: 1rem !important; /* Adjust description size */
   }
 }
+
+/* Update font color for descriptions in the social media poster section */
+#social-media-posters .mockup-desc,
+.video-section .ui-designs-desc {
+    color: #373737 !important; /* Updated font color */
+}
