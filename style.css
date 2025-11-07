@@ -750,6 +750,8 @@ display: inline-block; /* changed from flex to inline-block */
   .video-section .text-col {
     order: 0; /* Title and description first */
     padding-bottom: 20px;
+    text-align: center !important; /* Center text */
+    padding: 0 15px; /* Add padding for better spacing */
   }
 
   .video-section .video-col {
@@ -757,12 +759,12 @@ display: inline-block; /* changed from flex to inline-block */
   }
 
   .video-section .ui-designs-heading {
-    text-align: center !important;
+    text-align: center !important; /* Center heading */
   }
 
   .video-section .ui-designs-desc {
-    text-align: center !important;
-    margin: 0 auto;
+    text-align: center !important; /* Center description */
+    margin: 0 auto; /* Center within container */
   }
 }
 
