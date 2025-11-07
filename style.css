@@ -789,6 +789,7 @@ display: inline-block; /* changed from flex to inline-block */
 .staggered-gallery {
   display: grid;
   gap: 15px;
+  grid-template-columns: repeat(6, 1fr); /* Default: 6 images per row on larger devices */
 }
 
 @media (max-width: 991px) {
