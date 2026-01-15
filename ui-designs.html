@@ -1,294 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carl</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="style.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Design Projects - Carl Jeferson</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="style.css" rel="stylesheet">
+
+  <!-- Responsive UI Grid CSS -->
+  <style>
+    @media (max-width: 768px) {
+      #uiGrid {
+        grid-template-columns: 1fr !important;
+      }
+
+      #uiGrid .overlay {
+        opacity: 1 !important;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.2),
+          transparent
+        );
+      }
+
+      #uiGrid div[style*="aspect-ratio"] {
+        cursor: pointer;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" id="mainNavbar" 
-  style="background-color: #294fa6; position: fixed; top: 0; width: 100%; z-index: 1000; transform: translateY(-100%); transition: transform 0.3s ease-in-out; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-  <a class="navbar-brand pl-5" href="#" style="font-weight: 900; font-size: 24px; letter-spacing: -2px;">My Portfolio</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto pr-5">
-      <li class="nav-item mr-3">
-        <a class="nav-link active" href="#home" style="font-size: 18px;">Home</a>
-      </li>
-      <li class="nav-item mr-3">
-        <a class="nav-link" href="#ui-designs" style="font-size: 18px;">Designs</a>
-      </li>
-      <li class="nav-item mr-3">
-        <a class="nav-link" href="#social-media-posters" style="font-size: 18px;">Social Media</a>
-      </li>
-    </ul>
-  </div>
-  <div class="scroll-progress-container">
-    <div class="scroll-progress-bar"></div>
-  </div>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark"
+  style="background-color:#294fa6; position:fixed; top:0; width:100%; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+  <a class="navbar-brand pl-5" href="index.html" style="font-weight:900; font-size:24px; letter-spacing:-2px;">
+    My Portfolio
+  </a>
 </nav>
 
-<!-- Landing Page -->
-<div id="home" class="container-fluid d-flex align-items-center justify-content-center">
-  <div class="text-center hero-text-wrapper">
-      <h1 class="hero-name animate-fade-up">Carl Jeferson</h1>
-          <p class="hero-subtitle animate-fade-up" style="animation-delay: 0.2s;">
-                Graduate of Bachelor of Science in 
-                      <span class="highlight"><i>Information Technology</i></span>
-                          </p>
-                              <div class="social-icons mt-4 animate-fade-up" style="animation-delay: 0.4s;">
-                                    <a id="emailLink"
-                                             href="https://mail.google.com/mail/?view=cm&to=uricarljeferson@gmail.com"
-                                                      target="_blank"
-                                                               rel="noopener noreferrer"
-                                                                        class="social-link">
-                                                                                <i class="fas fa-envelope"></i>
-                                                                                      </a>
-                                                                                            <a href="https://linkedin.com/in/carljefersonuri"
-                                                                                                     target="_blank"
-                                                                                                              rel="noopener noreferrer"
-                                                                                                                       class="social-link">
-                                                                                                                               <i class="fab fa-linkedin-in"></i>
-                                                                                                                                     </a>
-                                                                       </div>
-                                                                       </div>
-                                                                       </div>
-
-<!-- About Page (Icons + Title, Refined Text Style) -->
-<div id="about" class="container-fluid py-3" style="background-color: #294fa6; color: white; font-family: 'Poppins', sans-serif;">
-  <div class="row w-100 d-flex align-items-center justify-content-center text-center">
-    <div class="col-12">
-      <!-- Title -->
-      <h3 class="pb-3" style="font-weight: 700; font-size: clamp(18px, 2.2vw, 28px); margin-bottom: 10px; letter-spacing: -2px;">
-        Tools & Technologies
-      </h3>
-
-      <!-- Scrolling Icons -->
-      <div class="logo-container">
-        <div class="logo-strip" id="logoStrip"></div>
-      </div>
-    </div>
-  </div>
+<!-- Hero Section -->
+<div style="background-color:#c50607; color:white; font-family:'Poppins',sans-serif; padding:140px 20px 40px; text-align:center;">
+  <h1 style="font-weight:900; font-size:clamp(36px,5vw,56px); letter-spacing:-2px;">
+    Design Works in Figma
+  </h1>
+  <p style="font-size:18px; max-width:700px; margin:0 auto; line-height:1.6;">
+    This page shows a collection of UI projects I designed in Figma. Each link lets you explore the full flow and screens, showing how ideas turn into clean, simple, and easy-to-use interfaces focused on a smooth user experience.
+  </p>
 </div>
 
-<!-- Project and Designs -->
-<!-- UI Designs Section -->
-<div id="ui-designs" class="ui-designs-section" style="background-color: #c50607; color: white; font-family: 'Poppins', sans-serif; padding: 60px 0;">
+<!-- Projects Grid -->
+<div id="ui-designs" class="ui-designs-section mobile-adjust" style="background-color: #c50607; color: white; font-family: 'Poppins', sans-serif; padding: 60px 0;">
   <div class="ui-designs-inner" style="display: flex; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; align-items: center;">
-
-    <!-- Left Column (30%) -->
-    <div class="ui-designs-left" style="flex: 0 0 30%; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; padding-right: 30px;">
-      <h2 class="ui-designs-heading" style="font-weight: 900; margin: 0; letter-spacing: -5px; line-height: 1;">
-        <span class="ui-word1">UI</span> <span class="ui-word2">DESIGNS</span>
-      </h2>
-      <p class="ui-designs-desc pop" style="max-width: 300px; margin-top: 20px; line-height: 1.6;">
-        A showcase of user interface designs I created as part of my academic projects.
-      </p>
-      <a href="ui-designs.html" style="display: inline-flex; align-items: center; gap: 8px; color: #e6c647; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease; align-self: flex-end; margin-top: 20px;">
-        View Figma Designs <i class="fas fa-external-link-alt" style="font-size: 12px;"></i>
-      </a>
-    </div>
-
-    <!-- Right Column (70%) -->
-    <div class="ui-designs-right" style="flex: 0 0 70%; position: relative; display: flex; flex-direction: column; align-items: center;">
-      <!-- Carousel Container -->
-      <div class="carousel-container pop" style="width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-        <div id="ui-carousel" style="display: flex; transition: transform 0.6s ease-in-out; width: 100%;">
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0001.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0002.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0003.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0004.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0005.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0006.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-          <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-            <img src="interface/i0007.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-          </div>
-        </div>
-      </div>
-
-      <!-- Centered Dots Below the Image -->
-      <div id="carousel-dots" style="display: flex; justify-content: center; margin-top: 15px;">
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: yellow; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        <span class="dot" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-      </div>
+    <div id="uiGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+      <!-- Cards injected here -->
     </div>
   </div>
 </div>
 
-<!-- Mockup and Templates Section -->
-<div class="mockup-section" style="background-color: #e6c647; color: black; font-family: 'Poppins', sans-serif; padding: 60px 0;">
-  <div class="container" style="max-width: 1200px;">
-    <div class="row align-items-center">
-      <!-- Left Column (70%) - Carousel -->
-      <!-- Left Column (70%) - Carousel -->
-      <div class="col-lg-8">
-        <!-- Match UI Designs carousel structure -->
-        <div class="carousel-container pop" style="width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-          <div id="mockup-carousel" style="display: flex; transition: transform 0.6s ease-in-out; width: 100%;">
-            <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-              <img src="designs/d-0001.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-            </div>
-            <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-              <img src="designs/d-0002.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-            </div>
-            <div style="flex: 0 0 100%; display: flex; justify-content: center; align-items: center;">
-              <img src="designs/d-0003.png" style="width: 95%; height: auto; object-fit: contain; border-radius: 12px;">
-            </div>
-          </div>
-        </div>
-        <!-- Dots Navigation -->
-        <div id="mockup-dots" style="display: flex; justify-content: center; margin-top: 15px;">
-          <span class="dot2" style="height: 12px; width: 12px; margin: 0 6px; background-color: #c50607; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-          <span class="dot2" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-          <span class="dot2" style="height: 12px; width: 12px; margin: 0 6px; background-color: white; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
-        </div>
-      </div>
-
-      <!-- Right Column (30%) - Text -->
-      <div class="col-lg-4">
-        <h2 class="mockup-heading" style="font-weight: 900; margin: 0; letter-spacing: -5px; line-height: 1; color: #c50607; text-align: left;">
-          <span class="mockup-row1">MOCKUP &</span>
-          <span class="mockup-row2">TEMPLATES</span>
-        </h2>
-        <p class="mockup-desc pop" style="max-width: 300px; margin-top: 20px; line-height: 1.6; color: #001e36;">
-          It shows some of my Mockup designs and Templates for social media posting.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Social Media Posters Section Title -->
-<div id="social-media-posters" style="background-color: white; width: 100%;">
-  <div class="text-center" style="padding: 60px 0 20px 0; max-width: 1200px; margin: 0 auto;">
-    <h2 class="mockup-heading" style="font-weight: 900; margin: 0 auto; letter-spacing: -5px; line-height: 1; color: #294fa6; text-align: center; display: inline-block;">
-      <span style="white-space: nowrap;">SOCIAL MEDIA POSTERS</span>
-    </h2>
-    <p class="mockup-desc pop" style="max-width: 600px; margin: 20px auto 0; line-height: 1.6; color: #555; text-align: center;">
-      A collection of social media designs created for various events and announcements.
-    </p>
-  </div>
-
-  <!-- NMV: poster-row with 30% video (left) and 70% text (right) -->
-  <div class="video-section" style="background-color: white; color: #c50607; font-family: 'Poppins', sans-serif; padding: 60px 0;">
-    <div class="container" style="max-width: 1200px;">
-      <div class="row align-items-center" style="gap: 20px; flex-wrap: nowrap;"> <!-- Added flex-wrap: nowrap -->
-        <div class="col-lg-4 video-col">
-          <div class="video-wrapper video-wrapper--small pop" style="background: white; border-radius: 12px;">
-            <video autoplay muted loop playsinline>
-              <source src="videos/NMV.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="col-lg-8 text-col">
-            <!-- add .left-align-heading to ensure internal lines are left-aligned on large screens -->
-            <h2 class="ui-designs-heading left-align-heading" style="font-weight: 900; margin: 0; letter-spacing: -5px; line-height: 1; text-align: left;">
-              <span class="ui-word1">NMV</span>
-              <span class="ui-word2">SUMMER LEAGUE</span>
-            </h2>
-           <p class="ui-designs-desc" style="max-width: 760px; margin-top: 12px; line-height: 1.6; text-align: left;">
-               As a volunteer content creator for our community basketball league, I honed my Adobe Photoshop and Canva skills while designing engaging social media posters. This hands-on experience enhanced my design capabilities and understanding of sports-focused content creation.
-             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Idol: same 40% / 60% layout, text on left, video on right -->
-  <div class="video-section" style="background-color: white; color: #c50607; font-family: 'Poppins', sans-serif; padding: 60px 0;">
-    <div class="container" style="max-width: 1200px;">
-      <div class="row align-items-center" style="gap: 20px; flex-wrap: nowrap;"> <!-- Added flex-wrap: nowrap -->
-        <!-- Left: Text (60%) -->
-        <div class="col-lg-8 text-col" style="text-align: right;">
-          <h2 class="ui-designs-heading" style="font-weight: 900; margin: 0; letter-spacing: -5px; line-height: 1; text-align: right;">
-            <span class="ui-word1" style="display: block;">IDOL</span>
-            <span class="ui-word2" style="display: block;">BASKETBALL</span>
-          </h2>
-          <p class="ui-designs-desc" style="max-width: 760px; margin-top: 12px; line-height: 1.6; text-align: right;">
-            I created social media content to promote the launch of this new basketball league, including game schedules, player highlights, and weekly features such as Player of the Game and Player of the Week.
-In addition to digital content, I designed the official league jerseys inspired by NBA aesthetics. Instead of team names, I incorporated the league’s branding — “IDOL” — to establish a strong and cohesive visual identity that reflects professionalism while maintaining the league’s unique character.
-          </p>
-        </div>
-
-         <!-- Right: Video (40%) -->
-         <div class="col-lg-4 video-col">
-           <div class="video-wrapper video-wrapper--small" style="background:white; border-radius:12px;">
-             <video autoplay muted loop playsinline>
-               <source src="videos/idolB.mp4" type="video/mp4">
-             </video>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-
-  <!-- OTHERS: title + short description (applies same text format) -->
-  <div class="video-section" style="background-color: white; color: #294fa6; font-family: 'Poppins', sans-serif; padding: 40px 0 20px;">
-    <div class="container" style="max-width: 1200px;">
-      <div class="row justify-content-center">
-        <div class="col-12 text-center">
-          <h2 class="mockup-heading" style="font-weight: 900; margin: 0 auto; letter-spacing: -5px; line-height: 1; color: #294fa6; text-align: center !important;">
-            <span>OTHERS</span>
-          </h2>
-          <p class="mockup-desc" style="max-width: 800px; margin: 12px auto 0; line-height: 1.6; color: #555; text-align: center;">
-            Here are some of my other social media content edits showcasing various creative works and designs.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Gallery Section -->
-  <div class="staggered-gallery" style="background-color: white; padding-bottom: 60px;">
-  <div><img src="arwido/a0001.png"></div>
-  <div><img src="arwido/a0002.png"></div>
-  <div><img src="arwido/a0003.png"></div>
-  <div><img src="arwido/a0004.png"></div>
-  <div><img src="arwido/a0005.png"></div>
-  <div><img src="autorepairshop/1.png"></div>
-  <div><img src="autorepairshop/2.png"></div>
-  <div><img src="autorepairshop/4.png"></div>
-  <div><img src="autorepairshop/5.png"></div>
-  <div><img src="autorepairshop/6.png"></div>
-  <div><img src="sports/s0016.jpg"></div>
-  <div><img src="dentalArch/0001.jpg"></div>
-  <div><img src="dentalArch/0002.jpg"></div>
-  <div><img src="dentalArch/0003.jpg"></div>
-  <div><img src="dentalArch/0004.jpg"></div>
-  <div><img src="autorepairshop/9.png"></div>
-  <div><img src="autorepairshop/10.png"></div>
-</div>
-</div>
-
-<!-- Footer -->
 <footer style="background: #294fa6; color: #ffffff; font-family: 'Poppins', sans-serif; padding: 80px 0 0 0; margin: 0; width: 100%; position: relative;">
       
           <!-- Main Footer Content -->
@@ -352,14 +133,71 @@ In addition to digital content, I designed the official league jerseys inspired 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </footer>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
  
-<!-- Bootstrap JS and dependencies -->
+
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Custom JS -->
-<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+<script>
+  fetch('UI.json')
+    .then(response => response.json())
+    .then(data => {
+      const uiGrid = document.getElementById('uiGrid');
+      const designs = data.uiDesigns.filter(d => d.hasFigmaLink === true);
+
+      designs.forEach(design => {
+        const card = document.createElement('div');
+        card.style.cssText = `
+          background:white;
+          border-radius:12px;
+          overflow:hidden;
+          box-shadow:0 4px 15px rgba(0,0,0,0.1);
+          transition:all 0.4s ease;
+        `;
+
+        card.innerHTML = `
+          <div class="image-wrapper"
+            style="position:relative; aspect-ratio:16/9; overflow:hidden; cursor:pointer;">
+            <img src="${design.image}" alt="${design.projectName}"
+              style="width:100%; height:100%; object-fit:cover;">
+            <div class="overlay"
+              style="position:absolute; inset:0; padding:28px;
+              display:flex; flex-direction:column; justify-content:flex-end;
+              background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.4s;">
+              <h3 style="color:white; font-size:20px; font-weight:700; margin-bottom:10px;">
+                ${design.projectName}
+              </h3>
+              <a href="${design.link}" target="_blank"
+                style="color:white; font-weight:600; text-decoration:none;">
+                View in Figma <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+        `;
+
+        const imageWrapper = card.querySelector('.image-wrapper');
+        const overlay = card.querySelector('.overlay');
+
+        function isMobile() {
+          return window.innerWidth <= 768;
+        }
+
+        if (!isMobile()) {
+          card.addEventListener('mouseenter', () => overlay.style.opacity = '1');
+          card.addEventListener('mouseleave', () => overlay.style.opacity = '0');
+        }
+
+        imageWrapper.addEventListener('click', () => {
+          window.open(design.link, '_blank');
+        });
+
+        uiGrid.appendChild(card);
+      });
+    })
+    .catch(err => console.error(err));
+</script>
+
 </body>
 </html>

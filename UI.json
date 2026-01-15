@@ -1,0 +1,46 @@
+{
+  "uiDesigns": [
+    {
+      "image": "interface/i0001.png",
+      "projectName": "Dental Web",
+      "link": "https://www.figma.com/proto/S2L96Z2Rx75Ys6WMqOeNMP/Untitled?node-id=0-1&p=f&t=uMy7n3A7CyuKuEIU-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=289%3A4012",
+      "hasFigmaLink": true
+    },
+    {
+      "image": "interface/i0002.png",
+      "projectName": "MeasuringBot Mobile App",
+      "link": "https://www.figma.com/proto/SYckZNY1iEBzEej4AozvFe/Untitled?node-id=0-1&p=f&t=XwBLsGDK4sGP7zBt-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A346",
+      "hasFigmaLink": true
+    },
+    {
+      "image": "interface/i0003.png",
+      "projectName": "Pocket Sight",
+      "link": "https://www.figma.com/proto/uw9C17KTHtFNPXNBwFOzY9/Untitled?node-id=0-1&p=f&t=WzohEdWXviS6A0tg-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=331%3A2836&show-proto-sidebar=1",
+      "hasFigmaLink": true
+    },
+    {
+      "image": "interface/i0004.png",
+      "projectName": "Project 4",
+      "link": "https://www.figma.com/file/example4",
+      "hasFigmaLink": false
+    },
+    {
+      "image": "interface/i0005.png",
+      "projectName": "Project 5",
+      "link": "https://www.figma.com/file/example5",
+      "hasFigmaLink": false
+    },
+    {
+      "image": "interface/i0006.png",
+      "projectName": "MeasuringBot Web App",
+      "link": "https://www.figma.com/proto/A5TOO6K5UaHwwM92mhw3K6/Untitled?node-id=0-1&p=f&t=WzohEdWXviS6A0tg-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A2053",
+      "hasFigmaLink": true
+    },
+    {
+      "image": "interface/i0007.png",
+      "projectName": "Wave Energy",
+      "link": "https://www.figma.com/proto/Q5yJrMer57XfpSYL0XXNbs/Untitled?t=WzohEdWXviS6A0tg-0&scaling=contain&content-scaling=fixed&starting-point-node-id=132%3A1958",
+      "hasFigmaLink": true
+    }
+  ]
+}
