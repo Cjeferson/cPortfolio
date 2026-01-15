@@ -273,6 +273,31 @@ body {
         font-size: 24px;
         margin: 0 6px;
     }
+    .ui-designs-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ui-designs-left {
+    align-items: center !important;
+    text-align: center !important;
+    padding-right: 0 !important;
+  }
+
+  .ui-designs-left a {
+    align-self: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ui-designs-desc,
+  .mockup-desc{
+    font-size: 14px !important; /* Minimized description size */
+  }
+
+  .mockup-heading,
+  .ui-designs-heading{
+    letter-spacing: -1px !important; /* Adjusted letter-spacing */
+  }
 }
 
 @media (max-width: 480px) {
