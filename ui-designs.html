@@ -14,28 +14,45 @@
   <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-  <!-- Custom CSS -->
-  <link href="style.css" rel="stylesheet">
-
-  <!-- Responsive UI Grid CSS -->
   <style>
-    @media (max-width: 768px) {
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Mobile + Tablet + Touch Devices */
+    @media (max-width: 1024px) {
       #uiGrid {
         grid-template-columns: 1fr !important;
+        padding: 0 16px; /* space from screen edges */
       }
 
       #uiGrid .overlay {
         opacity: 1 !important;
+        justify-content: flex-start !important;
+        padding: 18px !important; /* space inside image */
         background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.6),
-          rgba(0, 0, 0, 0.2),
+          to bottom,
+          rgba(0, 0, 0, 0.65),
+          rgba(0, 0, 0, 0.35),
           transparent
         );
       }
 
-      #uiGrid div[style*="aspect-ratio"] {
-        cursor: pointer;
+      #uiGrid .overlay h3 {
+        font-size: 18px;
+        margin-bottom: 6px;
+        text-align: left;
+      }
+
+      #uiGrid .overlay a {
+        font-size: 14px;
+      }
+    }
+
+    /* Desktop hover behavior */
+    @media (min-width: 1025px) {
+      #uiGrid .overlay {
+        opacity: 0;
       }
     }
   </style>
@@ -45,95 +62,31 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark"
-  style="background-color:#294fa6; position:fixed; top:0; width:100%; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-  <a class="navbar-brand pl-5" href="index.html" style="font-weight:900; font-size:24px; letter-spacing:-2px;">
+  style="background-color:#294fa6; position:fixed; top:0; width:100%; z-index:1000;">
+  <a class="navbar-brand pl-5" href="index.html"
+     style="font-weight:900; font-size:24px; letter-spacing:-2px;">
     My Portfolio
   </a>
 </nav>
 
 <!-- Hero Section -->
-<div style="background-color:#c50607; color:white; font-family:'Poppins',sans-serif; padding:140px 20px 40px; text-align:center;">
+<div style="background-color:#c50607; color:white; padding:140px 20px 40px; text-align:center;">
   <h1 style="font-weight:900; font-size:clamp(36px,5vw,56px); letter-spacing:-2px;">
     Design Works in Figma
   </h1>
   <p style="font-size:18px; max-width:700px; margin:0 auto; line-height:1.6;">
-    This page shows a collection of UI projects I designed in Figma. Each link lets you explore the full flow and screens, showing how ideas turn into clean, simple, and easy-to-use interfaces focused on a smooth user experience.
+    This page shows a collection of UI projects I designed in Figma.
   </p>
 </div>
 
 <!-- Projects Grid -->
-<div id="ui-designs" class="ui-designs-section mobile-adjust" style="background-color: #c50607; color: white; font-family: 'Poppins', sans-serif; padding: 60px 0;">
-  <div class="ui-designs-inner" style="display: flex; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; align-items: center;">
+<div style="background-color:#c50607; padding:60px 0;">
+  <div style="max-width:1200px; margin:0 auto;">
     <div id="uiGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
       <!-- Cards injected here -->
     </div>
   </div>
 </div>
-
-<footer style="background: #294fa6; color: #ffffff; font-family: 'Poppins', sans-serif; padding: 80px 0 0 0; margin: 0; width: 100%; position: relative;">
-      
-          <!-- Main Footer Content -->
-              <div style="max-width: 1400px; margin: 0 auto; padding: 0 80px 60px 80px; position: relative;">
-                      
-                              <!-- Large Background Text -->
-                                      <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; pointer-events: none; z-index: 0;">
-                                                  <h2 style="font-size: clamp(80px, 12vw, 180px); font-weight: 900; color: rgba(255, 255, 255, 0.08); margin: 0; letter-spacing: -5px; line-height: 1;">
-                                                                  LET'S TALK
-                                                                              </h2>
-                                                                                      </div>
-                                                                                              
-                                                                                                      <!-- Content Above Background -->
-                                                                                                              <div style="position: relative; z-index: 1;">
-                                                                                                                          
-                                                                                                                                      <!-- Top Section: Call to Action -->
-                                                                                                                                                  <div style="text-align: center; margin-bottom: 50px; padding-top: 40px;">
-                                                                                                                                                                  <p style="font-size: 14px; font-weight: 500; letter-spacing: 1px; color: #e6c647; margin-bottom: 10px; text-transform: uppercase;">
-                                                                                                                                                                                      Ready to connect?
-                                                                                                                                                                                                      </p>
-                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                          <!-- Bottom Section: Info & Socials -->
-                                                                                                                                                                                                                                                      <div class="row align-items-end" style="margin-top: 80px;">
-                                                                                                                                                                                                                                                                      
-                                                                                                                                                                                                                                                                                      <!-- Left: Copyright -->
-                                                                                                                                                                                                                                                                                                      <div class="col-md-3 mb-3 mb-md-0">
-                                                                                                                                                                                                                                                                                                                          <p style="margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.8); font-weight: 500;">
-                                                                                                                                                                                                                                                                                                                                                  <i class="far fa-copyright"></i> 2025
-                                                                                                                                                                                                                                                                                                                                                                      </p>
-                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                                                                                      <!-- Center: Social Links -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="col-md-6 text-center mb-3 mb-md-0">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div style="display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <a href="https://mail.google.com/mail/?view=cm&to=uricarljeferson@gmail.com" target="_blank" rel="noopener noreferrer" 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             style="padding: 12px 30px; border: 2px solid #ffffff; border-radius: 50px; text-decoration: none; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; text-transform: uppercase;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         EMAIL
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <a href="https://linkedin.com/in/carljefersonuri" target="_blank" rel="noopener noreferrer" 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    style="padding: 12px 30px; border: 2px solid #ffffff; border-radius: 50px; text-decoration: none; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; text-transform: uppercase;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                LINKEDIN
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <!-- Right: Back to Top & Credits -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="col-md-3 text-md-right text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex-wrap: wrap;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div style="text-align: right;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p style="margin: 0; font-size: 11px; color: rgba(255, 255, 255, 0.6);">Designed by</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p style="margin: 0; font-size: 12px; color: #ffffff; font-weight: 600;">Carl Jeferson Uri</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a href="#home" style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background-color: #c50607; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fas fa-arrow-up" style="color: #fff; font-size: 18px;"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
- 
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -154,7 +107,6 @@
           border-radius:12px;
           overflow:hidden;
           box-shadow:0 4px 15px rgba(0,0,0,0.1);
-          transition:all 0.4s ease;
         `;
 
         card.innerHTML = `
@@ -163,40 +115,37 @@
             <img src="${design.image}" alt="${design.projectName}"
               style="width:100%; height:100%; object-fit:cover;">
             <div class="overlay"
-              style="position:absolute; inset:0; padding:28px;
-              display:flex; flex-direction:column; justify-content:flex-end;
-              background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.4s;">
-              <h3 style="color:white; font-size:20px; font-weight:700; margin-bottom:10px;">
+              style="position:absolute; inset:0;
+              display:flex; flex-direction:column;
+              justify-content:flex-end;
+              padding:28px;
+              background:rgba(0,0,0,0.4);
+              transition:opacity 0.4s;">
+              <h3 style="color:white; font-size:20px; font-weight:700;">
                 ${design.projectName}
               </h3>
               <a href="${design.link}" target="_blank"
-                style="color:white; font-weight:600; text-decoration:none;">
+                 style="color:white; font-weight:600; text-decoration:none;">
                 View in Figma <i class="fas fa-external-link-alt"></i>
               </a>
             </div>
           </div>
         `;
 
-        const imageWrapper = card.querySelector('.image-wrapper');
         const overlay = card.querySelector('.overlay');
 
-        function isMobile() {
-          return window.innerWidth <= 768;
-        }
-
-        if (!isMobile()) {
+        if (window.innerWidth > 1024) {
           card.addEventListener('mouseenter', () => overlay.style.opacity = '1');
           card.addEventListener('mouseleave', () => overlay.style.opacity = '0');
         }
 
-        imageWrapper.addEventListener('click', () => {
-          window.open(design.link, '_blank');
-        });
+        card.querySelector('.image-wrapper')
+          .addEventListener('click', () => window.open(design.link, '_blank'));
 
         uiGrid.appendChild(card);
       });
     })
-    .catch(err => console.error(err));
+    .catch(console.error);
 </script>
 
 </body>
